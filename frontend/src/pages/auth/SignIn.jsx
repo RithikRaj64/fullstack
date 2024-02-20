@@ -1,8 +1,11 @@
 import { useState } from "react";
 
 import SignInPic from "../../assets/images/SignIn.jpg";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState({});
 
@@ -15,6 +18,8 @@ function SignIn() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        navigate("/user/home");
     }
 
     return (

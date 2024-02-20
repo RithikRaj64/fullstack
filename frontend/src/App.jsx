@@ -13,6 +13,8 @@ const LazyUserInfo = lazy(() => import('./pages/admin/UserInfo'))
 const LazyHome = lazy(() => import('./pages/user/Home'))
 const LazyAbout = lazy(() => import('./pages/user/About'))
 
+import Loader from './components/ui/Loader'
+
 const AdminRoutes = () => {
   return (
     <AdminLayout>
@@ -38,11 +40,12 @@ const UserRoutes = () => {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Navigate to="/signin" />} />
       <Route path="/signin" element={<LazyLayout component={LazySignIn} />} />
       <Route path="/signup" element={<LazyLayout component={LazySignUp} />} />
       <Route path="/admin/*" element={<AdminRoutes />} />
       <Route path="/user/*" element={<UserRoutes />} />
+      <Route path="load" element={<Loader />} />
     </Routes>
   )
 }
