@@ -4,7 +4,8 @@ import LazyLayout from './components/ui/LazyLayout'
 import UserLayout from './pages/user/UserLayout'
 import AdminLayout from './pages/admin/AdminLayout'
 
-const LazyLogin = lazy(() => import('./pages/auth/Login'))
+const LazySignIn = lazy(() => import('./pages/auth/SignIn'))
+const LazySignUp = lazy(() => import('./pages/auth/SignUp'))
 
 const LazyDashboard = lazy(() => import('./pages/admin/Dashboard'))
 const LazyUserInfo = lazy(() => import('./pages/admin/UserInfo'))
@@ -38,7 +39,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" />} />
-      <Route path="/login" element={<LazyLayout component={LazyLogin} />} />
+      <Route path="/signin" element={<LazyLayout component={LazySignIn} />} />
+      <Route path="/signup" element={<LazyLayout component={LazySignUp} />} />
       <Route path="/admin/*" element={<AdminRoutes />} />
       <Route path="/user/*" element={<UserRoutes />} />
     </Routes>
