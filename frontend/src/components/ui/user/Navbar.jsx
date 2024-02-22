@@ -15,7 +15,7 @@ function Nav() {
         <h1 className="text-white font-bold">EduConnect</h1>
       </div>
 
-      <ul className="flex space-x-8">
+      <ul className="flex space-x-8 text-sm">
         <li>
           <a href="/user/home" className="text-white font-bold hover:text-sky-200 hover:underline hover:underline-offset-8">Home</a>
         </li>
@@ -32,10 +32,10 @@ function Nav() {
         <img className="h-6 w-6 cursor-pointer" src={dropdown} onClick={() => setMenuOpen(!menuOpen)} />
         
         {menuOpen && (
-          <div className="absolute right-0 mt-8 bg-sky-200 border border-gray-300 rounded shadow-md">
-            <ul className="py-2">
-              <li className="px-4 py-2 hover:bg-sky-300 cursor-pointer"><a href="/user/profile">Profile</a></li>
-              <li className="px-4 py-2 hover:bg-sky-300 cursor-pointer"><a href="/signin">Logout</a></li>
+          <div className="absolute right-0 mt-8 bg-sky-100 border border-gray-300 rounded shadow-md text-sm">
+            <ul className="">
+              <li className="px-7 py-3 hover:bg-sky-300 cursor-pointer"><a href="/user/profile">Profile</a></li>
+              <li className="px-7 py-3 hover:bg-sky-300 cursor-pointer"><a href="/signin">Logout</a></li>
             </ul>
           </div>
         )}
