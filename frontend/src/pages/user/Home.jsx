@@ -1,8 +1,8 @@
 
 function Home() {
     return (
-        <div>
-            Home
+        <div className="bg-sky-200 min-h-screen p-16">
+            <div>Home</div>
         </div>
     );
 }

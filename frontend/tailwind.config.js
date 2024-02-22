@@ -2,8 +2,12 @@
 export default {
   content: ["./src/**/*.{html,jsx}"],
   theme: {
-    extend: {},
-  },
+    extend: {
+      fontFamily: {
+        'mono': ['JetBrainsMono', 'monospace'],
+      },
+    },
+  },  
   plugins: [],
 }
 
