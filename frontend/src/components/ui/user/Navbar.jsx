@@ -25,6 +25,12 @@ function Nav() {
         <li>
           <a href="/user/courses" className="text-white font-bold hover:text-sky-200 hover:underline hover:underline-offset-8">Courses</a>
         </li>
+        <li>
+          <a href="/user/course/8" className="text-white font-bold hover:text-sky-200 hover:underline hover:underline-offset-8">Dev</a>
+        </li>
+        <li>
+          <a href="/user/institute/8" className="text-white font-bold hover:text-sky-200 hover:underline hover:underline-offset-8">Dev 2</a>
+        </li>
       </ul>
 
       <div className="flex space-x-2 relative">
