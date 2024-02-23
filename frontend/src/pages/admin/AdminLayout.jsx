@@ -4,7 +4,7 @@ import Sidebar from '../../components/ui/admin/Sidebar';
 
 function AdminLayout({children}) {
     return (
-        <div className="admin_container">
+        <div className="flex flex-row min-w-screen">
             <aside>
                 <Sidebar />
             </aside>

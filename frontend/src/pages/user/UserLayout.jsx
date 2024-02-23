@@ -6,7 +6,8 @@ import Footer from "../../components/ui/user/Footer"
 
 function UserLayout({children}) {
     return (
-        <div className="flex flex-col min-h-screen">
+
+        <div className="flex flex-col min-h-screen no-scrollbar overflow-y-auto"> 
             <header>
                 <Navbar />
             </header>
