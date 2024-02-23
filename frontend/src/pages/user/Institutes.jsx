@@ -1,4 +1,4 @@
-import InstituteCard from "./InstituteCard";
+import InstituteCard from "../../components/ui/user/InstituteCard";
 
 function Institutes() {
   return (

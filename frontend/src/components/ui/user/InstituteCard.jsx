@@ -1,4 +1,4 @@
-import college from "../../assets/images/College.jpg";
+import college from "../../../assets/images/College.jpg";
 
 function InstituteCard() {
     return (

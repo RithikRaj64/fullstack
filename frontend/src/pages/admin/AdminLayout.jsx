@@ -5,10 +5,10 @@ import Sidebar from '../../components/ui/admin/Sidebar';
 function AdminLayout({children}) {
     return (
         <div className="flex flex-row min-w-screen">
-            <aside>
+            <aside className='fixed'>
                 <Sidebar />
             </aside>
-            <main>
+            <main className="ml-64 flex-grow">
                 {children}
             </main>
         </div>

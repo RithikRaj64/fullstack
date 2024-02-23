@@ -8,7 +8,7 @@ function Sidebar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="flex h-screen font-mono">
+    <div className="flex font-mono min-h-screen">
       <div className="bg-blue-600 w-64 p-5 text-white">
 
         <div className="flex space-x-2 mb-8">

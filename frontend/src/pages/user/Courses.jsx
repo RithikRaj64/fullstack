@@ -1,4 +1,4 @@
-import InstituteCard from "./InstituteCard";
+import CourseCard from "../../components/ui/user/CourseCard";
 
 function Courses() {
   return (
@@ -16,13 +16,13 @@ function Courses() {
         </button>
         </div>
       </div>
-      <div className="grid grid-cols-4">
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
+      <div className="pr-9">
+          <CourseCard />
+          <CourseCard />
+          <CourseCard />
+          <CourseCard />
+          <CourseCard />
+          <CourseCard />
       </div>
     </div>
   );
