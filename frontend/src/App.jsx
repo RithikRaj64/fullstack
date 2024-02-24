@@ -14,6 +14,7 @@ const LazyAdminCourses = lazy(() => import('./pages/admin/Courses'))
 const LazyAdminInstitutes = lazy(() => import('./pages/admin/Institutes'))
 const LazyAdminCourseDetails = lazy(() => import('./pages/admin/CourseDetails'))
 const LazyAdminInstituteDetails = lazy(() => import('./pages/admin/InstituteDetails'))
+const LazyAdminUserDetails = lazy(() => import('./pages/admin/UserDetails'))
 
 const LazyUserHome = lazy(() => import('./pages/user/Home'))
 const LazyUserCourses = lazy(() => import('./pages/user/Courses'))
@@ -37,6 +38,7 @@ const AdminRoutes = () => {
         <Route path='/course/:id' element={<LazyLayout component={LazyAdminCourseDetails} />} />
         <Route path='/institute/:id' element={<LazyLayout component={LazyAdminInstituteDetails} />} />
         <Route path="/courses/:name" element={<LazyLayout component={LazyAdminCourses} />} />
+        <Route path='/user/:id' element={<LazyLayout component={LazyAdminUserDetails} />} />
       </Routes>
     </AdminLayout>
   )
