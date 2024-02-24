@@ -1,11 +1,6 @@
-import { useState } from "react";
 import icon from "../../../assets/images/Icon.png";
-import dropdown from "../../../assets/images/dropdown.png";
-
-const name = "Rithik Raj";
 
 function Sidebar() {
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="flex font-mono min-h-screen">
@@ -31,18 +26,14 @@ function Sidebar() {
           </li>
         </ul>
 
-        <div className="flex space-x-2 mt-8 align-bottom">
-            <p className="text-white font-bold">Welcome {name}</p>
-            <img className="h-6 w-6 cursor-pointer" src={dropdown} onClick={() => setMenuOpen(!menuOpen)} />
+        <div className="mt-64 pt-48">
+          <p className="text-white font-bold mb-2 ">Welcome Admin</p>
 
-            {menuOpen && (
-              <div className="absolute left-3 mt-9 bg-sky-100 border border-gray-300 rounded shadow-md text-sm text-black">
-                  <ul className="">
-                  <li className="px-16 py-3 hover:bg-sky-300 cursor-pointer"><a href="/admin/profile">Profile</a></li>
-                  <li className="px-16 py-3 hover:bg-sky-300 cursor-pointer"><a href="/signin">Logout</a></li>
-                  </ul>
-              </div>
-            )}
+          <ul>
+            <li>
+              <a href="/signin" className="font-bold text-sm hover:text-sky-200 hover:underline hover:underline-offset-8">Logout</a>
+            </li>
+          </ul>
         </div>
 
       </div>

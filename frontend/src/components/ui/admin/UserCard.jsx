@@ -1,9 +1,9 @@
-import Pic from '../../../assets/images/College.jpg'
+import User from '../../../assets/images/User.png'
 
 function UserCard() {
     return (
         <div className="max-w-sm bg-white border border-gray-200 rounded-xl shadow m-5 p-8 tracking-tighter flex flex-col items-center">
-            <img src={Pic} className='rounded-full w-24 h-24 mb-4'></img>
+            <img src={User} className='rounded-full w-24 h-24 mb-4'></img>
             <p>Rithik Raj</p>
             <p>Age : 19</p>
             <a href="#" className="inline-flex text-white bg-sky-600 hover:bg-sky-800 hover:px-5 px-3 py-2 mt-5 rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
