@@ -24,6 +24,8 @@ const LazyUserCourseDetails = lazy(() => import('./pages/user/CourseDetails'))
 const LazyUserInstituteDetails = lazy(() => import('./pages/user/InstituteDetails'))
 
 import Loader from './components/ui/Loader'
+const LazyTerms = lazy(() => import('./components/ui/user/Terms'))
+const LazyPrivacy = lazy(() => import('./components/ui/user/Privacy'))
 
 const AdminRoutes = () => {
   return (
@@ -66,11 +68,14 @@ function App() {
   return (
     <Routes>
       <Route path="*" element={<ErrorPage />} />
+      <Route path="/" element={<Navigate to="/signin" />} />
       <Route path="/signin" element={<LazyLayout component={LazySignIn} />} />
       <Route path="/signup" element={<LazyLayout component={LazySignUp} />} />
       <Route path="/admin/*" element={<AdminRoutes />} />
       <Route path="/user/*" element={<UserRoutes />} />
       <Route path="/load" element={<Loader />} />
+      <Route path="/terms" element={<LazyTerms />} />
+      <Route path="/privacy-policy" element={<LazyPrivacy />} />
     </Routes>
   )
 }

@@ -2,6 +2,10 @@ import { useState } from "react";
 
 import SignUpPic from "../../assets/images/SignIn.jpg";
 
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 function SignUp() {
 
     const [data, setData] = useState({});
@@ -17,25 +21,26 @@ function SignUp() {
         // e.preventDefault();
 
         if (data.password.length < 8) {
-            alert("Password must be at least 8 characters long");
+            toast.warn("Password must be at least 8 characters long");
             return;
         }
 
         let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
 
         if (!regex.test(data.password)) {
-            alert("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+            toast.warn("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character");
             return;
         }
 
         if (data.password !== data.confirmPassword) {
-            alert("Passwords do not match");
+            toast.warn("Passwords do not match");
             return;
         }
     }
 
     return (
         <>
+            <ToastContainer />
             <div className="grid grid-cols-3 overflow-clip">
                 <div className="col-span-2">
                     <img
@@ -148,35 +153,12 @@ function SignUp() {
                                         id="mobile"
                                         name="mobile"
                                         type="phone"
+                                        required
                                         autoComplete="mobile"
                                         pattern="[0-9]{10}"
                                         onChange={handleChange}
-                                        required
                                         className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-4"
                                     />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label
-                                    htmlFor="type"
-                                    className="block text-sm font-medium leading-4 text-gray-900"
-                                >
-                                    Select Account Type
-                                </label>
-                                <div className="mt-2">
-                                    <select
-                                        id="type"
-                                        name="type"
-                                        autoComplete="type"
-                                        onChange={handleChange}
-                                        required
-                                        className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-4"
-                                    >
-                                        <option value="buyer">Student</option>
-                                        <option value="institute">Institute</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
                                 </div>
                             </div>
 
@@ -184,7 +166,7 @@ function SignUp() {
                                 <button
                                     type="submit"
                                     onClick={handleSubmit}
-                                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-4 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-4 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Sign Up
                                 </button>

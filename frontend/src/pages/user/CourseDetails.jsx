@@ -78,58 +78,29 @@ function CourseDetail() {
                 <form className="fixed top-0 left-0 w-full h-full bg-opacity-0 bg-black backdrop-blur-md py-20 pb-36 mt-20 flex justify-center font-mono overflow-auto">
                     <div className="bg-sky-200 border-2 border-black w-[90%] h-fit p-5 rounded-xl flex flex-col items-center">
                         
-                        <h1 className="text-2xl font-bold mb-3">Add Course</h1>
+                        <h1 className="text-2xl font-bold mb-3">Apply</h1>
                         
                         <div className="bg-white w-full p-5 mb-2 rounded-xl flex flex-col space-y-3">
                         
-                        <div className="flex flex-col">
-                            <label htmlFor="insName" className="tracking-tighter text-sm mb-1 pl-0.5">Institute Name</label>
-                            <input type="text" id="insName" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 "></input>
-                        </div>
-                        
-                        <div className="flex flex-col">
-                            <label htmlFor="crsName" className="tracking-tighter text-sm mb-1 pl-0.5">Course Name</label>
-                            <input type="text" id="crsName" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 "></input>
-                        </div>
 
                         <div className="flex flex-col">
-                            <label htmlFor="crsLevel" className="tracking-tighter text-sm mb-1 pl-0.5">Degree Level</label>
+                            <label htmlFor="crsLevel" className="tracking-tighter text-sm mb-1 pl-0.5">Admission type</label>
                             <select type="text" id="crsLevel" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 ">
-                            <option value="UG">Undergraduate</option>
-                            <option value="PG">Postgraduate</option>
-                            <option value="DIP">Diploma</option>
+                            <option value="UG">Regular</option>
+                            <option value="PG">Lateral</option>
+                            <option value="DIP">Transfer</option>
                             </select>
                         </div>
 
                         <div className="flex flex-col">
-                            <label htmlFor="crsDuration" className="tracking-tighter text-sm mb-1 pl-0.5">Duration (Years)</label>
-                            <input type="number" id="crsDuration" min="1" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 "></input>
-                        </div>
-                        
-                        <div className="flex flex-col">
-                            <label htmlFor="crsSemesters" className="tracking-tighter text-sm mb-1 pl-0.5">No of Semesters</label>
-                            <input type="number" id="crsSemesters" min="2" step="2" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 "></input>
-                        </div>
-
-                        <div className="flex flex-col">
-                            <label htmlFor="crsDescription" className="tracking-tighter text-sm mb-1 pl-0.5">Description</label>
-                            <textarea id="crsDescription" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 min-h-9"></textarea>
-                        </div>
-
-                        <div className="flex flex-col">
-                            <label htmlFor="crsFees" className="tracking-tighter text-sm mb-1 pl-0.5">Fees (per year)</label>
-                            <input type="number" min="0" step="1000" id="crsFees" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 "></input>
-                        </div>
-
-                        <div className="flex flex-col">
-                            <label htmlFor="crsSyllabus" className="tracking-tighter text-sm mb-1 pl-0.5">Syllabus PDF</label>
+                            <label htmlFor="crsSyllabus" className="tracking-tighter text-sm mb-1 pl-0.5">ID proof as PDF</label>
                             <input type="file" id="crsSyllabus" accept=".pdf" className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1.5 border-2 border-gray-600 "></input>
                         </div>
                         
                         </div>
 
                         <button type="submit" className="bg-green-600 hover:bg-green-800 hover:px-3 text-white p-2 tracking-tighter rounded-lg mt-3">
-                            Add Course
+                            Apply
                         </button>
                     
                     </div>
