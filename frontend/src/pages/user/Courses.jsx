@@ -1,9 +1,9 @@
 import CourseCard from "../../components/ui/user/CourseCard";
-import Background from "../../assets/images/Course.jpg"
 
 function Courses() {
   return (
-    <div className={`bg-[url(../../assets/images/Course.jpg)] bg-cover backdrop-blur-lg min-h-screen p-12`}>
+    // <div className={`bg-[url(../../assets/images/Course.jpg)] bg-cover backdrop-blur-lg min-h-screen p-12`}>
+    <div className="bg-sky-200 min-h-screen p-12">
       <div className="items-center">
         <div className="mb-5 mx-5 flex items-center">
           <div className="relative w-full">

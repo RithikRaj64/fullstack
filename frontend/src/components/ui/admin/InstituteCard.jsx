@@ -12,7 +12,7 @@ function InstituteCard() {
                 </a>
                 <p className="mb-5 font-normal text-gray-700 tracking-tighter">Technology Education for a Better Future. Sri Krishna College of Engineering and Technology is the most sought after Institution among the premier technical Institutions in South India. </p>
                 <div className="grid grid-cols-2 justify-center space-x-2 text-sm">
-                    <a href="/admin/institute/6" className="inline-flex justify-center text-white bg-sky-600 hover:bg-sky-800  px-3 py-2 rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
+                    <a href="/admin/institute/6" className="inline-flex justify-center text-white bg-blue-600 hover:bg-sky-800  px-3 py-2 rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
                         View Details
                         <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-RithikrajApplication<rithikraj>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.educonnect.rithikraj.RithikrajApplication",
+            "projectName": "rithikraj",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

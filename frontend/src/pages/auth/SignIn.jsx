@@ -30,9 +30,10 @@ function SignIn() {
                         src={SignInPic}
                     />
                 </div>
-                <div className="mt-18 flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+                <div className="bg-sky-200 flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+                    <div className="bg-white p-6 rounded-lg">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             Sign in to your account
                         </h2>
                     </div>
@@ -87,7 +88,7 @@ function SignIn() {
                                 <button
                                     type="submit"
                                     onClick={handleSubmit}
-                                    className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Sign in
                                 </button>
@@ -98,12 +99,13 @@ function SignIn() {
                             Not a member?{" "}
                             <a
                                 href="/signup"
-                                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                                className="font-semibold leading-6 text-blue-600 hover:underline hover:underline-offset-8"
                             >
                                 Sign Up
                             </a>
                         </p>
                     </div>
+                </div>
                 </div>
             </div>
         </>

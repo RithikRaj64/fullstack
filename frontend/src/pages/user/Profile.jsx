@@ -3,10 +3,12 @@ import { useState } from "react";
 import User from "../../assets/images/User.png";
 
 import ProfileCourses from "../../components/ui/user/ProfileCourses";
+import ProfileTransactions from "../../components/ui/user/ProfileTransactions";
 
 function Profile() {
   const [personalState, setPersonalState] = useState(true);
   const [eduState, setEduState] = useState(true);
+  const [showWhich, setShowWhich] = useState(true);
 
   return (
     <div className="bg-sky-200 min-h-screen p-12 font-mono">
@@ -34,14 +36,14 @@ function Profile() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col space-y-8">
+        <div className="mt-10 flex flex-col space-y-8 mb-10">
           <div className="border border-gray-200 p-8 rounded-lg">
             <div className="mb-6">
               <div className="flex flex-row justify-between items-center  mb-2">
                 <p className="font-bold text-2xl">Personal Information:</p>
                 {personalState ? (
                   <button
-                    className="bg-sky-600 hover:bg-sky-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
+                    className="bg-blue-600 hover:bg-sky-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
                     onClick={() => setPersonalState(!personalState)}
                   >
                     <div className="flex flex-row space-x-2">
@@ -152,10 +154,10 @@ function Profile() {
           <div className="border border-gray-200 p-6 rounded-lg">
             <div className="mb-6">
               <div className="flex flex-row justify-between items-center  mb-2">
-                <p className="font-bold text-2xl">Personal Information:</p>
+                <p className="font-bold text-2xl">Educational Information:</p>
                 {eduState ? (
                   <button
-                    className="bg-sky-600 hover:bg-sky-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
+                    className="bg-blue-600 hover:bg-sky-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
                     onClick={() => setEduState(!eduState)}
                   >
                     <div className="flex flex-row space-x-2">
@@ -228,28 +230,52 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center mb-10">
-          <button className="bg-red-600 hover:bg-red-800 border border-gray-200 rounded-lg p-1 px-3 text-white mt-8">
-            Revoke Access
-          </button>
-        </div>
-        <div>
-          <hr className="bg-black border border-black mb-8"></hr>
 
-          <div className="flex justify-center mb-8 font-bold text-lg">
-            <h1>Course Status</h1>
-          </div>
+        {showWhich ? (
+          <div>
+            <div className="grid grid-cols-2">
+              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 underline underline-offset-8 hover:bg-sky-200">
+                <h1>Course Status</h1>
+              </button>
+              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 hover:bg-sky-200" onClick={() => setShowWhich(!showWhich)}>
+                <h1>Transaction History</h1>
+              </button>
+            </div>
 
-          <div className="flex flex-col space-y-5">
-            <ProfileCourses />
-            <ProfileCourses />
-            <ProfileCourses />
-            <ProfileCourses />
-            <ProfileCourses />
-            <ProfileCourses />
-            <ProfileCourses />
+
+            <div className="flex flex-col space-y-5">
+              <ProfileCourses />
+              <ProfileCourses />
+              <ProfileCourses />
+              <ProfileCourses />
+              <ProfileCourses />
+              <ProfileCourses />
+              <ProfileCourses />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>
+            <div className="grid grid-cols-2">
+              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 hover:bg-sky-200" onClick={() => setShowWhich(!showWhich)}>
+                <h1>Course Status</h1>
+              </button>
+              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 underline underline-offset-8 hover:bg-sky-200">
+                <h1>Transaction History</h1>
+              </button>
+            </div>
+
+            <div className="flex flex-col space-y-5">
+              <ProfileTransactions />
+              <ProfileTransactions />
+              <ProfileTransactions />
+              <ProfileTransactions />
+              <ProfileTransactions />
+              <ProfileTransactions />
+              <ProfileTransactions />
+              <ProfileTransactions />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

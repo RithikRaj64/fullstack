@@ -40,7 +40,7 @@ function CourseDetail() {
                         </div>
 
                         <div className="space-x-2">
-                            <button className="inline-flex text-white bg-sky-600 hover:bg-sky-800 hover:px-5 px-3 py-2 rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
+                            <button className="inline-flex text-white bg-blue-600 hover:bg-sky-800 hover:px-5 px-3 py-2 rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
                                 Download Syllabus
                                 <svg className="rtl:rotate-180 w-4 h-4 ms-2 mt-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
                                     <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
