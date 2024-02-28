@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
-    private String name;
-    private String email;
-    private String password;
-    private String mobile;
+public class LoginResponse {
+    @Builder.Default
+    private String message = "Something went wrong... ";
+    @Builder.Default
+    private String accessToken = "";
 }

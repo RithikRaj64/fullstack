@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.educonnect.rithikraj.dto.request.RegisterRequest;
+import com.educonnect.rithikraj.dto.request.UpdatePassRequest;
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.dto.response.UserResponse;
 import com.educonnect.rithikraj.model.User;
@@ -29,10 +30,17 @@ public class UserServiceImpl implements UserService {
         
 
         if (isUser.isPresent()) {
-            return MessageResponse.builder().message("User already exists with email " + request.getEmail()).build();
+            return MessageResponse.builder()
+                                    .message("User already exists with email " + request.getEmail())
+                                    .build();
         }
 
-        var user = User.builder().name(request.getName()).email(request.getEmail()).password(request.getPassword()).mobile(request.getMobile()).role(request.getRole()).build();
+        var user = User.builder()
+                        .name(request.getName())
+                        .email(request.getEmail())
+                        .password(request.getPassword())
+                        .mobile(request.getMobile())
+                        .build();
 
         userRepository.save(user);
 
@@ -47,13 +55,23 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("User not found with id " + id);
         }
 
-        return UserResponse.builder().name(isUser.get().getName()).email(isUser.get().getEmail()).mobile(isUser.get().getMobile()).role(isUser.get().getRole()).build();
+        return UserResponse.builder()
+                            .name(isUser.get().getName())
+                            .email(isUser.get().getEmail())
+                            .mobile(isUser.get().getMobile())
+                            .password(isUser.get().getPassword())
+                            .build();
     }
 
     @Override
     public List<UserResponse> getAll() {
         List<User> users = userRepository.findAll();
-        return users.stream().map(user -> UserResponse.builder().name(user.getName()).email(user.getEmail()).build())
+        return users.stream().map(user -> UserResponse.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .mobile(user.getMobile())
+                .build())
                 .collect(Collectors.toList());
         // return users.map(user -> UserResponse.builder().name(user.getName()).email(user.getEmail()).build());
     }
@@ -72,14 +90,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public MessageResponse updatePassword(String id, String password) {
-        Optional<User> isUser = userRepository.findById(id);
+    public MessageResponse updatePassword(UpdatePassRequest request) {
+        Optional<User> isUser = userRepository.findByEmail(request.getEmail());
 
         if (isUser.isEmpty()) {
-            return MessageResponse.builder().message("User not found with id " + id).build();
+            return MessageResponse.builder().message("User not found with email " + request.getEmail()).build();
         }
 
-        var user = User.builder().name(isUser.get().getName()).email(isUser.get().getEmail()).mobile(isUser.get().getMobile()).role(isUser.get().getRole()).build();
+        var user = User.builder().name(isUser.get().getName()).email(isUser.get().getEmail()).mobile(isUser.get().getMobile()).role(isUser.get().getRole()).password(request.getNewPassword()).build();
 
         userRepository.save(user);
 

@@ -1,4 +1,4 @@
-package com.educonnect.rithikraj.dto.response;
+package com.educonnect.rithikraj.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
-    private String name;
+public class UpdatePassRequest {
     private String email;
-    private String password;
-    private String mobile;
+    private String oldPassword;
+    private String newPassword;
 }
