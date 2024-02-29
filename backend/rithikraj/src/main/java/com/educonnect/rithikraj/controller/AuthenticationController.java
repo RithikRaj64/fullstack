@@ -1,5 +1,9 @@
 package com.educonnect.rithikraj.controller;
 
+import static com.educonnect.rithikraj.utils.MyConstant.AUTH;
+import static com.educonnect.rithikraj.utils.MyConstant.REGISTER;
+import static com.educonnect.rithikraj.utils.MyConstant.SIGNIN;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,13 +20,13 @@ import com.educonnect.rithikraj.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping(AUTH)
 @RequiredArgsConstructor
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/register")
+    @PostMapping(REGISTER)
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         MessageResponse response = new MessageResponse();
 
@@ -35,7 +39,7 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping(SIGNIN)
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         LoginResponse response = new LoginResponse();
 

@@ -2,6 +2,7 @@ package com.educonnect.rithikraj.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 @RequestMapping(MyConstant.USER)
 @RequiredArgsConstructor
+// @PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 public class UserController {
 
     private final UserService userService;
@@ -42,6 +45,7 @@ public class UserController {
     }
 
     @GetMapping(MyConstant.GET)
+    @PreAuthorize("hasAuthority('user:read')")
     public ResponseEntity<?> getAllUsers() {
         
         try {
@@ -93,5 +97,3 @@ public class UserController {
     }
     
 }
-
-// Create request and response dto, models, one CRUD for user table, get all , get all by ID

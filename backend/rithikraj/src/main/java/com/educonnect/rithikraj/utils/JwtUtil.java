@@ -1,7 +1,9 @@
-package com.educonnect.rithikraj.config;
+package com.educonnect.rithikraj.utils;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
@@ -18,6 +21,9 @@ public class JwtUtil {
 
     @Value("${application.security.jwt.secret_key}")
     private String secret_key;
+
+    @Value("${application.security.jwt.expiration_time}")
+    private long expiration_date;
     
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -52,5 +58,24 @@ public class JwtUtil {
 
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
+    }
+
+    public String generateToken(UserDetails userDetails) {
+        return buildToken(new HashMap<>(), userDetails, expiration_date);
+    }
+
+    public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
+        return buildToken(claims, userDetails, expiration_date);
+    }
+
+    private String buildToken(Map<String, Object> claims, UserDetails userDetails, long expiration) {
+        return Jwts.builder()
+                    .setClaims(claims)
+                    .setSubject(userDetails.getUsername())
+                    .setIssuer("Rithik Raj")
+                    .setIssuedAt(new Date(System.currentTimeMillis()))
+                    .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                    .signWith(getSignigKey(), SignatureAlgorithm.HS256)
+                    .compact();
     }
 }
