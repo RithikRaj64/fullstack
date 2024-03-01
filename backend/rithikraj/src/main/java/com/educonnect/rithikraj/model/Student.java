@@ -1,9 +1,6 @@
 package com.educonnect.rithikraj.model;
 
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
+import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -15,15 +12,18 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "_institute")
-public class Institute {
-
+@Table(name = "_student")
+public class Student {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -33,26 +33,41 @@ public class Institute {
     private boolean completed = false;
 
     @Column(nullable = false)
-    private String instituteName;
+    private String fatherName;
 
     @Column(nullable = false)
-    private String location;
+    private String motherName;
 
     @Column(nullable = false)
-    private String email;
+    private Date dob;
 
     @Column(nullable = false)
-    private String mobile;
+    private String gender;
 
     @Column(nullable = false)
-    private String website;
+    private String emisNo;
 
     @Column(nullable = false)
-    private String about;
+    private String aadharNo;
 
-    @OneToOne(mappedBy = "institute")
+    @Column(nullable = false)
+    private String nationality;
+
+    @Column(nullable = false)
+    private String tenthBoard;
+
+    @Column(nullable = false)
+    private float tenthPercentage; 
+
+    @Column(nullable = false)
+    private String twelthBoard;
+
+    @Column(nullable = false)
+    private float twelthPercentage;
+
+    @OneToOne(mappedBy = "student")
     private User user;
 
-    @OneToMany(mappedBy = "institute")
-    private List<Course> courses;
+    @OneToMany(mappedBy = "student")
+    private List<Application> applications;
 }

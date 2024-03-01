@@ -12,7 +12,9 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 import java.util.Collection;
 import java.util.List;
@@ -49,6 +51,14 @@ public class User implements UserDetails {
     
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+
+    @OneToOne()
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private Student student;
+   
+    @OneToOne()
+    @JoinColumn(name = "institute_id", referencedColumnName = "id")
+    private Institute institute;
 
     @Enumerated(EnumType.STRING)
     private Role role;
