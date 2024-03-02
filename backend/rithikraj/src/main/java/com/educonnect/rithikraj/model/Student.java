@@ -32,37 +32,37 @@ public class Student {
     @Builder.Default
     private boolean completed = false;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String fatherName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String motherName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date dob;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String gender;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String emisNo;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String aadharNo;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nationality;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String tenthBoard;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private float tenthPercentage; 
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String twelthBoard;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private float twelthPercentage;
 
     @OneToOne(mappedBy = "student")

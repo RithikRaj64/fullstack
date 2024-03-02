@@ -1,9 +1,5 @@
 package com.educonnect.rithikraj.enumerated;
 
-import static com.educonnect.rithikraj.enumerated.Permission.ADMIN_CREATE;
-import static com.educonnect.rithikraj.enumerated.Permission.ADMIN_DELETE;
-import static com.educonnect.rithikraj.enumerated.Permission.ADMIN_READ;
-import static com.educonnect.rithikraj.enumerated.Permission.ADMIN_UPDATE;
 import static com.educonnect.rithikraj.enumerated.Permission.USER_CREATE;
 import static com.educonnect.rithikraj.enumerated.Permission.USER_DELETE;
 import static com.educonnect.rithikraj.enumerated.Permission.USER_READ;
@@ -21,16 +17,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Role {
     ADMIN(Set.of(
-        ADMIN_CREATE,
-        ADMIN_READ,
-        ADMIN_UPDATE,
-        ADMIN_DELETE,
         USER_READ,
         USER_CREATE,
         USER_UPDATE,
         USER_DELETE
     )),
-    USER(Set.of(
+    STUDENT(Set.of(
+        USER_CREATE,
+        USER_READ,
+        USER_UPDATE,
+        USER_DELETE
+    )),
+    INSTITUTE(Set.of(
         USER_CREATE,
         USER_READ,
         USER_UPDATE,

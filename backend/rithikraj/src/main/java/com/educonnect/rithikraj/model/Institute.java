@@ -32,22 +32,22 @@ public class Institute {
     @Builder.Default
     private boolean completed = false;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String instituteName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String location;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String mobile;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String website;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String about;
 
     @OneToOne(mappedBy = "institute")

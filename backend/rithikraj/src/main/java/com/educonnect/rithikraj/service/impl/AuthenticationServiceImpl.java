@@ -15,6 +15,8 @@ import com.educonnect.rithikraj.dto.request.RegisterRequest;
 import com.educonnect.rithikraj.dto.response.LoginResponse;
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.enumerated.Role;
+import com.educonnect.rithikraj.model.Institute;
+import com.educonnect.rithikraj.model.Student;
 import com.educonnect.rithikraj.model.Token;
 import com.educonnect.rithikraj.model.User;
 import com.educonnect.rithikraj.repository.TokenRepository;
@@ -46,15 +48,57 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                     .build();
         }
 
-        var user = User.builder()
-                        .name(request.getName())
-                        .email(request.getEmail())
-                        .password(passwordEncoder.encode(request.getPassword()))
-                        .role(Role.valueOf(request.getRole()))
-                        .mobile(request.getMobile())
-                        .build();
+        // var user = User.builder()
+        //         .name(request.getName())
+        //         .email(request.getEmail())
+        //         .password(passwordEncoder.encode(request.getPassword()))
+        //         .mobile(request.getMobile())
+        //         .role(Role.valueOf(request.getRole()))
+        //         .build();
 
-        userRepository.save(user);
+        // if (request.getRole().equals("STUDENT")) {
+        //     var student = Student.builder().build();
+        //     user.setStudent(student);
+        // } else if (request.getRole().equals("INSTITUTE")) {
+        //     var institute = Institute.builder().build();
+        //     user.setInstitute(institute);
+        // }
+        
+        Object user = null;
+
+        if(request.getRole().equals("STUDENT")) {
+            var details = Student.builder().build();
+            user = User.builder()
+                            .name(request.getName())
+                            .email(request.getEmail())
+                            .password(passwordEncoder.encode(request.getPassword()))
+                            .role(Role.valueOf(request.getRole()))
+                            .mobile(request.getMobile())
+                            .student((Student)details)
+                            .build();
+        }
+        else if(request.getRole().equals("INSTITUTE")) {
+            var details = Institute.builder().build();
+            user = User.builder()
+                            .name(request.getName())
+                            .email(request.getEmail())
+                            .password(passwordEncoder.encode(request.getPassword()))
+                            .role(Role.valueOf(request.getRole()))
+                            .mobile(request.getMobile())
+                            .institute((Institute)details)
+                            .build();
+        }
+        else {
+            user = User.builder()
+                            .name(request.getName())
+                            .email(request.getEmail())
+                            .password(passwordEncoder.encode(request.getPassword()))
+                            .role(Role.valueOf(request.getRole()))
+                            .mobile(request.getMobile())
+                            .build();
+        }
+
+        userRepository.save((User)user);
 
         return MessageResponse.builder()
                                 .message("User registered successfully")
@@ -91,8 +135,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                             .build();
 
         tokenRepository.save(token);
-
-        throw new UnsupportedOperationException("Unimplemented method 'saveUserToken'");
     }
 
     private void revokeAllUserTokens(User user) {
