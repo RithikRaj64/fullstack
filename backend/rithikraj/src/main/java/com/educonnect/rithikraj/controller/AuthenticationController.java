@@ -35,7 +35,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         }
         catch(Exception e) {
-            return new ResponseEntity<>(response.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
         }
     }
 
@@ -47,7 +47,7 @@ public class AuthenticationController {
             response = authenticationService.login(request);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(response.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(LoginResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
         }
     }
 }
