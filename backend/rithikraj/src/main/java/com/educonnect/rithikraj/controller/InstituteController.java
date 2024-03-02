@@ -1,8 +1,8 @@
 package com.educonnect.rithikraj.controller;
 
-import static com.educonnect.rithikraj.utils.Access.STUDENT_DELETE;
-import static com.educonnect.rithikraj.utils.Access.STUDENT_READ;
-import static com.educonnect.rithikraj.utils.Access.STUDENT_UPDATE;
+import static com.educonnect.rithikraj.utils.Access.INSTITUTE_DELETE;
+import static com.educonnect.rithikraj.utils.Access.INSTITUTE_READ;
+import static com.educonnect.rithikraj.utils.Access.INSTITUTE_UPDATE;
 import static com.educonnect.rithikraj.utils.MyConstant.DELETE;
 import static com.educonnect.rithikraj.utils.MyConstant.GET;
 import static com.educonnect.rithikraj.utils.MyConstant.UPDATE_DETAILS;
@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educonnect.rithikraj.dto.response.MessageResponse;
-import com.educonnect.rithikraj.service.StudentService;
+import com.educonnect.rithikraj.service.InstituteService;
 import com.educonnect.rithikraj.utils.MyConstant;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(MyConstant.STUDENT)
+@RequestMapping(MyConstant.INSTITUTE)
 @RequiredArgsConstructor
 @PreAuthorize("hasAnyRole('ADMIN', 'STUDENT', 'INSTITUTE')")
-public class StudentController {
+public class InstituteController {
 
-    private StudentService studentService;
+    private InstituteService instituteService;
     
     @GetMapping(GET)
-    @PreAuthorize(STUDENT_READ)
+    @PreAuthorize(INSTITUTE_READ)
     public ResponseEntity<?> getAllUsers() {
         
         try {
-            var response = studentService.getAll();
+            var response = instituteService.getAll();
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
@@ -44,11 +44,11 @@ public class StudentController {
     }
     
     @GetMapping(GET + "/{id}")
-    @PreAuthorize(STUDENT_READ)
+    @PreAuthorize(INSTITUTE_READ)
     public ResponseEntity<?> getUserByID(@PathVariable String id) {
         
         try {
-            var response = studentService.getById(id);
+            var response = instituteService.getById(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
@@ -56,11 +56,11 @@ public class StudentController {
     }
 
     @DeleteMapping(DELETE + "/{id}")
-    @PreAuthorize(STUDENT_DELETE)
+    @PreAuthorize(INSTITUTE_DELETE)
     public ResponseEntity<?> deleteUserByID(@PathVariable String id) {
         
         try {
-            var response = studentService.deleteById(id);
+            var response = instituteService.deleteById(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
@@ -68,11 +68,11 @@ public class StudentController {
     }
 
     @PatchMapping(UPDATE_DETAILS)
-    @PreAuthorize(STUDENT_UPDATE)
+    @PreAuthorize(INSTITUTE_UPDATE)
     public ResponseEntity<?> updateDetails(@PathVariable String id) {
         
         try {
-            var response = studentService.updateDetails(id);
+            var response = instituteService.updateDetails(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);

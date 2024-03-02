@@ -84,7 +84,7 @@ public class UserController {
 
     }
 
-    @PatchMapping(MyConstant.UPDATE_PASSWORD)
+    @PatchMapping(MyConstant.UPDATE)
     public ResponseEntity<?> updateUserPassword(@RequestBody UpdatePassRequest request) {
         MessageResponse response = new MessageResponse();
 
