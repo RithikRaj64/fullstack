@@ -6,7 +6,7 @@ import com.educonnect.rithikraj.dto.request.RegisterRequest;
 import com.educonnect.rithikraj.dto.request.UpdatePassRequest;
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.dto.response.UserResponse;
-import com.educonnect.rithikraj.utils.UserNotFoundException;
+import com.educonnect.rithikraj.exception.UserNotFoundException;
 
 public interface UserService {
 

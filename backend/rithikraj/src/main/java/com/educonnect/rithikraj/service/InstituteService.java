@@ -1,13 +1,19 @@
 package com.educonnect.rithikraj.service;
 
+import java.util.List;
+
+import com.educonnect.rithikraj.dto.response.MessageResponse;
+import com.educonnect.rithikraj.exception.NotFoundException;
+import com.educonnect.rithikraj.model.Institute;
+
 public interface InstituteService {
 
-    Object getAll();
+    List<Institute> getAll();
 
-    Object getById(String id);
+    Institute getById(String id) throws NotFoundException;
 
-    Object deleteById(String id);
+    MessageResponse deleteById(String id);
 
-    Object updateDetails(String id);
+    MessageResponse updateDetails(String id);
     
 }

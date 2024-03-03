@@ -1,13 +1,19 @@
 package com.educonnect.rithikraj.service;
 
+import java.util.List;
+
+import com.educonnect.rithikraj.dto.response.MessageResponse;
+import com.educonnect.rithikraj.dto.response.StudentResponse;
+import com.educonnect.rithikraj.exception.StudentNotFoundException;
+
 public interface StudentService {
 
-    Object getAll();
+    List<StudentResponse> getAll();
 
-    Object getById(String id);
+    StudentResponse getByEmail(String email) throws StudentNotFoundException;
 
-    Object deleteById(String id);
+    MessageResponse deleteByEmail(String email);
 
-    Object updateDetails(String id);
+    MessageResponse updateDetails(String id);
     
 }

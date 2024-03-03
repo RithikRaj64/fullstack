@@ -11,9 +11,9 @@ import com.educonnect.rithikraj.dto.request.RegisterRequest;
 import com.educonnect.rithikraj.dto.request.UpdatePassRequest;
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.dto.response.UserResponse;
+import com.educonnect.rithikraj.exception.UserNotFoundException;
 import com.educonnect.rithikraj.service.UserService;
 import com.educonnect.rithikraj.utils.MyConstant;
-import com.educonnect.rithikraj.utils.UserNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 

@@ -43,12 +43,12 @@ public class StudentController {
         }
     }
     
-    @GetMapping(GET + "/{id}")
+    @GetMapping(GET + "/{email}")
     @PreAuthorize(STUDENT_READ)
-    public ResponseEntity<?> getUserByID(@PathVariable String id) {
+    public ResponseEntity<?> getUserByID(@PathVariable String email) {
         
         try {
-            var response = studentService.getById(id);
+            var response = studentService.getByEmail(email);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
@@ -60,7 +60,7 @@ public class StudentController {
     public ResponseEntity<?> deleteUserByID(@PathVariable String id) {
         
         try {
-            var response = studentService.deleteById(id);
+            var response = studentService.deleteByEmail(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
