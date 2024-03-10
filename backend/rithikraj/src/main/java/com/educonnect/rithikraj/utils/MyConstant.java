@@ -22,6 +22,8 @@ public class MyConstant {
 
     // Application Controller
     public static final String APPLICATION = "/api/v1/application";
+    public static final String ACCEPT = "/accept";
+    public static final String REJECT = "/reject";
 
     // Transaction Controller
     public static final String TRANSACTION = "/api/v1/transaction";
@@ -49,6 +51,26 @@ public class MyConstant {
                                                                 HttpMethod.DELETE.name(), HttpMethod.PATCH.name(), 
                                                                 HttpMethod.HEAD.name(), HttpMethod.OPTIONS.name());
     public static final String[] WHITELIST = {
-        "/api/v1/auth/**"
+        "/api/v1/auth/**",
+        "/swagger-ui/**",
+        "/swagger-ui.html/**",
+        "/v3/api-docs/**"
     };
+
+    // JWT
+    public static final String JWT_LOCALHOST_URL = "http://localhost:8080";
+    public static final String JWT_SECURITY_SCHEME_NAME = "bearerAuth";
+    public static final String JWT_SCHEME = "bearer";
+    public static final String JWT_DESCRIPTION = "Provide the JWT token.";
+    public static final String JWT_BEARER_FORMAT = "JWT";
+
+    // Swagger
+    public static final String SWAGGER_TITLE = "EduConnect";
+    public static final String SWAGGER_DESCRIPTION = "EduConnect - Online College Admission Portal";
+    public static final String SWAGGER_VERSION = "1.0";
+    public static final String SWAGGER_CONTACT_NAME = "Rithik Raj K S";
+    public static final String SWAGGER_CONTACT_URL = "https://www.linkedin.com/in/rithik-raj-k-s-a180ab226";
+    public static final String SWAGGER_CONTACT_EMAIL = "rithu0644@gmail.com";
+    public static final String SWAGGER_LICENSE = "Apache 2.0";
+    public static final String SWAGGER_LICENSE_URL = "http://www.apache.org/licenses/LICENSE-2.0.html";
 }

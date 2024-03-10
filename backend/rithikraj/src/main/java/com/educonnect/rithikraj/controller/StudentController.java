@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.educonnect.rithikraj.dto.request.StudentRequest;
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.service.StudentService;
 import com.educonnect.rithikraj.utils.MyConstant;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -29,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @PreAuthorize("hasAnyRole('ADMIN', 'STUDENT', 'INSTITUTE')")
 public class StudentController {
 
-    private StudentService studentService;
+    private final StudentService studentService;
     
     @GetMapping(GET)
     @PreAuthorize(STUDENT_READ)
@@ -43,12 +45,12 @@ public class StudentController {
         }
     }
     
-    @GetMapping(GET + "/{email}")
+    @GetMapping(GET + "/{id}")
     @PreAuthorize(STUDENT_READ)
-    public ResponseEntity<?> getUserByID(@PathVariable String email) {
+    public ResponseEntity<?> getUserByID(@PathVariable String id) {
         
         try {
-            var response = studentService.getByEmail(email);
+            var response = studentService.getById(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
@@ -60,19 +62,19 @@ public class StudentController {
     public ResponseEntity<?> deleteUserByID(@PathVariable String id) {
         
         try {
-            var response = studentService.deleteByEmail(id);
+            var response = studentService.deleteById(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
         }
     }
 
-    @PatchMapping(UPDATE_DETAILS)
+    @PatchMapping(UPDATE_DETAILS + "/{id}")
     @PreAuthorize(STUDENT_UPDATE)
-    public ResponseEntity<?> updateDetails(@PathVariable String id) {
+    public ResponseEntity<?> updateDetails(@PathVariable String id, @RequestBody StudentRequest request) {
         
         try {
-            var response = studentService.updateDetails(id);
+            var response = studentService.updateDetails(id, request);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);

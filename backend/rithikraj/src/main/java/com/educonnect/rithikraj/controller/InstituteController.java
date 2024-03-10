@@ -1,7 +1,7 @@
 package com.educonnect.rithikraj.controller;
 
-import static com.educonnect.rithikraj.utils.Access.INSTITUTE_DELETE;
 import static com.educonnect.rithikraj.utils.Access.INSTITUTE_READ;
+import static com.educonnect.rithikraj.utils.Access.INSTITUTE_DELETE;
 import static com.educonnect.rithikraj.utils.Access.INSTITUTE_UPDATE;
 import static com.educonnect.rithikraj.utils.MyConstant.DELETE;
 import static com.educonnect.rithikraj.utils.MyConstant.GET;
@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.educonnect.rithikraj.dto.request.InstituteRequest;
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.service.InstituteService;
 import com.educonnect.rithikraj.utils.MyConstant;
@@ -29,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @PreAuthorize("hasAnyRole('ADMIN', 'STUDENT', 'INSTITUTE')")
 public class InstituteController {
 
-    private InstituteService instituteService;
+    private final InstituteService instituteService;
     
     @GetMapping(GET)
     @PreAuthorize(INSTITUTE_READ)
@@ -39,7 +41,7 @@ public class InstituteController {
             var response = instituteService.getAll();
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
         }
     }
     
@@ -51,7 +53,7 @@ public class InstituteController {
             var response = instituteService.getById(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
         }
     }
 
@@ -65,17 +67,19 @@ public class InstituteController {
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
         }
+
     }
 
-    @PatchMapping(UPDATE_DETAILS)
+    @PatchMapping(UPDATE_DETAILS + "/{id}")
     @PreAuthorize(INSTITUTE_UPDATE)
-    public ResponseEntity<?> updateDetails(@PathVariable String id) {
+    public ResponseEntity<?> updateDetails(@PathVariable String id, @RequestBody InstituteRequest request) {
         
         try {
-            var response = instituteService.updateDetails(id);
+            var response = instituteService.updateDetails(id, request);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
         }
+
     }
 }

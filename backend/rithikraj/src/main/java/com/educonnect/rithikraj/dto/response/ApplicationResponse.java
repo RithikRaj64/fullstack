@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstituteResponse {
+public class ApplicationResponse {
     private String id;
-    private String instituteName;
-    private String location;
-    private String email;
-    private String mobile;
-    private String website;
-    private String about;
-    private boolean completed;
+    private String studentId;
+    private String studentName;
+    private String courseId;
+    private String courseName;
+    private String status;
 }

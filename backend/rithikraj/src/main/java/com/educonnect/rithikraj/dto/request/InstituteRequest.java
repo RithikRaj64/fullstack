@@ -1,4 +1,4 @@
-package com.educonnect.rithikraj.dto.response;
+package com.educonnect.rithikraj.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstituteResponse {
-    private String id;
+public class InstituteRequest {
     private String instituteName;
     private String location;
     private String email;
     private String mobile;
     private String website;
     private String about;
-    private boolean completed;
 }

@@ -48,6 +48,16 @@ public class Course {
     @Column(nullable = false)
     private float fees;
 
+    @Column(nullable = false)
+    private int totalSeats;
+
+    @Column(nullable = false)
+    private int availableSeats;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private int acceptedStudents = 0;
+
     @OneToOne(mappedBy = "course")
     private Application application;
 

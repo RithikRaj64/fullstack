@@ -1,11 +1,13 @@
 package com.educonnect.rithikraj.service.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.educonnect.rithikraj.dto.request.StudentRequest;
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.dto.response.StudentResponse;
 import com.educonnect.rithikraj.exception.StudentNotFoundException;
@@ -44,11 +46,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponse getByEmail(String email) throws StudentNotFoundException {
-        Optional<Student> isStudent = studentRepository.findByEmail(email);
+    public StudentResponse getById(String id) throws StudentNotFoundException {
+        Optional<Student> isStudent = studentRepository.findById(id);
 
         if(isStudent.isEmpty()) {
-            throw new StudentNotFoundException("Student not found with the mail id : " + email);
+            throw new StudentNotFoundException("Student not found with the mail id : " + id);
         }
 
         return StudentResponse.builder()
@@ -67,12 +69,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public MessageResponse deleteByEmail(String email) {
-        Optional<Student> isStudent = studentRepository.findByEmail(email);
+    public MessageResponse deleteById(String id) {
+        Optional<Student> isStudent = studentRepository.findById(id);
 
         if(isStudent.isEmpty()) {
             return MessageResponse.builder()
-                                    .message("Student not found with the mail id : " + email)
+                                    .message("Student not found with the mail id : " + id)
                                     .build();
         }
 
@@ -84,9 +86,47 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public MessageResponse updateDetails(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateDetails'");
+    public MessageResponse updateDetails(String id, StudentRequest request) {
+        Student student = studentRepository.findById(id).orElse(null);
+
+        student = setStudentDetails(student, request);
+        if(done(student)) student.setCompleted(true);
+        
+        studentRepository.save(student);
+
+        return MessageResponse.builder().message("Student details updated successfully").build();
+    }
+
+    private boolean done(Student student) {
+        Field[] fields = student.getClass().getDeclaredFields();
+        
+        for(Field field : fields) {
+            field.setAccessible(true);
+            try {
+                if(field.get(student) == null) return false;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return true;
+    }
+
+    private Student setStudentDetails(Student student, StudentRequest request) {
+        if(student.getFatherName() == null) student.setFatherName(request.getFatherName());
+        if(student.getMotherName() == null) student.setMotherName(request.getMotherName());
+        if(student.getDob() == null) student.setDob(request.getDob());
+        if(student.getGender() == null) student.setGender(request.getGender());
+        if(student.getEmisNo() == null) student.setEmisNo(request.getEmisNo());
+        if(student.getAadharNo() == null) student.setAadharNo(request.getAadharNo());
+        if(student.getNationality() == null) student.setNationality(request.getNationality());
+        if(student.getTenthBoard() == null) student.setTenthBoard(request.getTenthBoard());
+        if(student.getTenthPercentage() == 0) student.setTenthPercentage(request.getTenthPercentage());
+        if(student.getTwelthBoard() == null) student.setTwelthBoard(request.getTwelthBoard());
+        if(student.getTwelthPercentage() == 0) student.setTwelthPercentage(request.getTwelthPercentage());
+
+        return student;
     }
 
 }

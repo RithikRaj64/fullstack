@@ -50,8 +50,7 @@ public enum Role {
         APPLICATION_DELETE,
         COURSE_READ,
         COURSE_DELETE,
-        TRANSACTION_READ,
-        APPLICATION_READ
+        TRANSACTION_READ
     )),
     STUDENT(Set.of(
         USER_CREATE,

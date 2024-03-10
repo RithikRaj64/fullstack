@@ -1,4 +1,4 @@
-package com.educonnect.rithikraj.dto.response;
+package com.educonnect.rithikraj.dto.request;
 
 import java.sql.Date;
 
@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentResponse {  
-    private String id;
+public class StudentRequest {
     private String fatherName;
     private String motherName;
     private Date dob;
@@ -21,7 +20,7 @@ public class StudentResponse {
     private String aadharNo;
     private String nationality;
     private String tenthBoard;
-    private String twelthBoard;
     private float tenthPercentage; 
+    private String twelthBoard;
     private float twelthPercentage;
 }

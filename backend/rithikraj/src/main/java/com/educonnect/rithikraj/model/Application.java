@@ -1,5 +1,6 @@
 package com.educonnect.rithikraj.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,10 @@ public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private String status = "Applied";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
