@@ -1,12 +1,32 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { logoutRedux, getName } from "../../../redux/authSlice";
+
+import { logout } from "../../../services/auth.js"
 
 import icon from "../../../assets/images/Icon.png";
 import dropdown from "../../../assets/images/dropdown.png";
 
-const name = "Rithik Raj";
-
 function Nav() {
+
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+
+  const name = useSelector(getName);
+
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      dispatch(logoutRedux());
+      nav("/signin");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <nav className="bg-blue-600 min-w-screen border-1 border-sky-200 p-5 shadow-md shadow-sky-800 flex justify-between items-center text-lg font-mono relative z-10">
@@ -35,7 +55,7 @@ function Nav() {
           <div className="absolute right-0 mt-8 bg-sky-100 border border-gray-300 rounded shadow-md text-sm">
             <ul className="">
               <li className="px-7 py-3 hover:bg-sky-300 cursor-pointer"><a href="/user/profile">Profile</a></li>
-              <li className="px-7 py-3 hover:bg-sky-300 cursor-pointer"><a href="/signin">Logout</a></li>
+              <li className="px-7 py-3 hover:bg-sky-300 cursor-pointer"><button onClick={handleLogout}>Logout</button></li>
             </ul>
           </div>
         )}

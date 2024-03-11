@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.aspectj.bridge.Message;
 import org.springframework.stereotype.Service;
 
 import com.educonnect.rithikraj.dto.request.CourseRequest;
@@ -81,6 +82,26 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public MessageResponse increaseAvailableSeatsById(String id) {
+        Course course = courseRepository.findById(id).orElse(null);
+
+        course.setAvailableSeats(course.getAvailableSeats() + 1);
+        courseRepository.save(course);
+
+        return MessageResponse.builder().message("Available seats increased by 1 for the course with id " + id).build();
+    }
+
+    @Override
+    public MessageResponse increaseAcceptedStudentsById(String id) {
+        Course course = courseRepository.findById(id).orElse(null);
+
+        course.setAcceptedStudents(course.getAcceptedStudents() + 1);
+        courseRepository.save(course);
+
+        return MessageResponse.builder().message("Accepted students decreased by 1 for the course with id " + id).build();
+    }
+
+    @Override
     public MessageResponse createCourse(CourseRequest request) {
         Institute institute = instituteRepository.findById(request.getInstituteId()).orElse(null);
         
@@ -100,6 +121,13 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.save(course);
 
         return MessageResponse.builder().message("Course created successfully").build();
+    }
+
+    @Override
+    public MessageResponse deleteCourse(String id) {
+        courseRepository.deleteById(id);
+
+        return MessageResponse.builder().message("Course deleted successfully").build();
     }
     
 }

@@ -1,54 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import InstituteCard from "../../components/ui/admin/InstituteCard";
+import { allIns } from "../../services/user";
 
 function Institutes() {
-  const [formVisibility, setFormVisibility] = useState(false);
 
-  const openForm = () => {
-    setFormVisibility(true);
-  };
+  const [institutes, setInstitutes] = useState([]);
 
-  const closeForm = () => {
-    setFormVisibility(false);
-  };
+  const getInstitutes = async () => {
+    let res = await allIns();
+    setInstitutes(res.data);
+    console.log(await res.data);
+  }
+
+  useEffect(() => {
+    getInstitutes();
+    console.log(institutes);
+  }, []);
 
   return (
     <div className="bg-sky-200 min-h-screen p-12 font-mono">
-      <div className="mb-5 mx-5 flex justify-center">
-        <button
-          onClick={openForm}
-          className="bg-green-600  hover:bg-green-800 hover:px-3 text-white p-2 tracking-tighter rounded-lg flex flex-row space-x-2"
-        >
-          <div className="h-4 w-4 mt-1">
-            <svg
-              fill="#ffffff"
-              version="1.1"
-              id="Capa_1"
-              xmlns="http://www.w3.org/2000/svg"
-              width="15px"
-              height="15px"
-              viewBox="0 0 45.402 45.402"
-              xmlSpace="preserve"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <g id="SVGRepo_iconCarrier">
-                {" "}
-                <g>
-                  {" "}
-                  <path d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141 c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27 c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435 c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z" />{" "}
-                </g>{" "}
-              </g>
-            </svg>
-          </div>
-          <p>Add Institute</p>
-        </button>
-      </div>
+    
       <div className="items-center">
         <div className="mb-5 mx-5 flex items-center">
           <div className="relative w-full">
@@ -84,15 +56,14 @@ function Institutes() {
         </div>
       </div>
       <div className="grid grid-cols-3">
-        <InstituteCard />
-        <InstituteCard />
-        <InstituteCard />
-        <InstituteCard />
-        <InstituteCard />
-        <InstituteCard />
+          {
+            institutes.map((institute) => {
+              return <InstituteCard key={institute.id} data={institute} />
+            })
+          }
       </div>
 
-      {formVisibility && (
+      {/* {formVisibility && (
         <form className="fixed top-0 left-0 w-full h-full bg-opacity-0 bg-black backdrop-blur-md py-16 flex justify-center font-mono overflow-auto">
           <div className="bg-sky-200 border-2 border-black w-[90%] h-fit p-5 rounded-xl flex flex-col items-center">
             <h1 className="text-2xl font-bold mb-3">Add Institute</h1>
@@ -235,7 +206,7 @@ function Institutes() {
             </svg>
           </button>
         </form>
-      )}
+      )} */}
     </div>
   );
 }

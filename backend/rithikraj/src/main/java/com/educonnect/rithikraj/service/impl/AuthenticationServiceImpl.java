@@ -66,6 +66,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         
         Object user = null;
 
+        System.out.println(request.toString());
+
         if(request.getRole().equals("STUDENT")) {
             var details = Student.builder().build();
             user = User.builder()
@@ -116,13 +118,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         claims.put("role", user.getRole().toString());
 
         var accessToken = jwtUtil.generateToken(claims, user);
-
+        
         revokeAllUserTokens(user);
         saveUserToken(accessToken, user);
 
         return LoginResponse.builder()
                             .message("User logged in successfully")
                             .accessToken(accessToken)
+                            .id(user.getId())
+                            .name(user.getName())
                             .build();
     }
 

@@ -3,6 +3,7 @@ import { lazy } from 'react'
 import LazyLayout from './components/ui/LazyLayout'
 import UserLayout from './pages/user/UserLayout'
 import AdminLayout from './pages/admin/AdminLayout'
+import InstituteLayout from './pages/institute/InstituteLayout'
 import ErrorPage from './components/ui/ErrorPage'
 
 const LazySignIn = lazy(() => import('./pages/auth/SignIn'))
@@ -23,6 +24,12 @@ const LazyUserProfile = lazy(() => import('./pages/user/Profile'))
 const LazyUserCourseDetails = lazy(() => import('./pages/user/CourseDetails'))
 const LazyUserInstituteDetails = lazy(() => import('./pages/user/InstituteDetails'))
 
+const LazyInstituteProfile = lazy(() => import('./pages/institute/Profile'))
+const LazyInstituteCourses = lazy(() => import('./pages/institute/Courses'))
+const LazyInstituteApplications = lazy(() => import('./pages/institute/Applications'))
+const LazyInstituteCourseDetails = lazy(() => import('./pages/institute/CourseDetails'))
+// const LazyInstituteApplications = lazy(() => import('./pages/institute/Applications'))
+
 import Loader from './components/ui/Loader'
 const LazyTerms = lazy(() => import('./components/ui/user/Terms'))
 const LazyPrivacy = lazy(() => import('./components/ui/user/Privacy'))
@@ -38,11 +45,24 @@ const AdminRoutes = () => {
         <Route path='/courses' element={<LazyLayout component={LazyAdminCourses} />} />
         <Route path='/institutes' element={<LazyLayout component={LazyAdminInstitutes} />} />
         <Route path='/course/:id' element={<LazyLayout component={LazyAdminCourseDetails} />} />
-        <Route path='/institute/:id' element={<LazyLayout component={LazyAdminInstituteDetails} />} />
+        <Route path='/institute/view' element={<LazyLayout component={LazyAdminInstituteDetails} />} />
         <Route path="/courses/:name" element={<LazyLayout component={LazyAdminCourses} />} />
         <Route path='/user/:id' element={<LazyLayout component={LazyAdminUserDetails} />} />
       </Routes>
     </AdminLayout>
+  )
+}
+
+const InstituteRoutes = () => {
+  return (
+    <InstituteLayout>
+      <Routes>
+        <Route path='/profile' element={<LazyLayout component={LazyInstituteProfile} />}/>
+        <Route path='/courses' element={<LazyLayout component={LazyInstituteCourses} />}/>
+        <Route path='/applications' element={<LazyLayout component={LazyInstituteApplications} />}/>
+        <Route path='/course/view' element={<LazyLayout component={LazyInstituteCourseDetails} />} />
+      </Routes>
+    </InstituteLayout>
   )
 }
 
@@ -56,8 +76,8 @@ const UserRoutes = () => {
           <Route path="/courses" element={<LazyLayout component={LazyUserCourses} />} />
           <Route path="/institutes" element={<LazyLayout component={LazyUserInstitutes} />} />
           <Route path="/profile" element={<LazyLayout component={LazyUserProfile} />} />
-          <Route path="/course/:id" element={<LazyLayout component={LazyUserCourseDetails} />} />
-          <Route path="/institute/:id" element={<LazyLayout component={LazyUserInstituteDetails} />} />
+          <Route path="/course/view" element={<LazyLayout component={LazyUserCourseDetails} />} />
+          <Route path="/institute/view" element={<LazyLayout component={LazyUserInstituteDetails} />} />
           <Route path="/courses/:name" element={<LazyLayout component={LazyUserCourses} />} />
       </Routes>
     </UserLayout>
@@ -73,6 +93,7 @@ function App() {
       <Route path="/signup" element={<LazyLayout component={LazySignUp} />} />
       <Route path="/admin/*" element={<AdminRoutes />} />
       <Route path="/user/*" element={<UserRoutes />} />
+      <Route path="/institute/*" element={<InstituteRoutes />} />
       <Route path="/load" element={<Loader />} />
       <Route path="/terms" element={<LazyTerms />} />
       <Route path="/privacy-policy" element={<LazyPrivacy />} />

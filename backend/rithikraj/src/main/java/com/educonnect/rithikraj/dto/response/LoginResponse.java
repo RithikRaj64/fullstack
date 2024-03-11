@@ -14,4 +14,6 @@ public class LoginResponse {
     private String message = "Something went wrong... ";
     @Builder.Default
     private String accessToken = "";
+    private String id;
+    private String name;
 }

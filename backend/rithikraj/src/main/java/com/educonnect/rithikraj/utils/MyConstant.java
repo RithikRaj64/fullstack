@@ -44,7 +44,7 @@ public class MyConstant {
 
 
     // Web Security
-    public static final List<String> ORIGINS = Arrays.asList("http://localhost:4000", "http://localhost:5713");
+    public static final List<String> ORIGINS = Arrays.asList("http://localhost:4000", "http://localhost:5173");
     public static final List<String> HEADERS = Arrays.asList(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE);
     public static final List<String> METHODS = Arrays.asList(HttpMethod.GET.name(), 
                                                                 HttpMethod.POST.name(), HttpMethod.PUT.name(), 

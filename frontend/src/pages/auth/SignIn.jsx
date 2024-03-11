@@ -1,11 +1,22 @@
 import { useState } from "react";
 
-import SignInPic from "../../assets/images/SignIn.jpg";
+import { useDispatch } from "react-redux";
+import { setAuthenthenicated, setToken, setRole, setId, setName } from "../../redux/authSlice";
+
+import { jwtDecode } from "jwt-decode";
+
+import { signIn } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import SignInPic from "../../assets/images/SignIn.jpg";
 
 function SignIn() {
 
-    const navigate = useNavigate();
+    const nav = useNavigate();
+    const dispatch = useDispatch();
 
     const [data, setData] = useState({});
 
@@ -16,13 +27,60 @@ function SignIn() {
         });
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        navigate("/user/home");
+        try {
+            let details = {
+                "email" : data.email,
+                "password" : data.password
+            };
+
+            let response = await signIn(details);
+            console.log(response);
+            
+            if(response.status === 200) {
+                const { accessToken, id, name } = response.data;
+
+                sessionStorage.setItem("token", accessToken);
+
+                let role = jwtDecode(accessToken)?.role;
+                dispatch(setAuthenthenicated(true));
+                dispatch(setToken(accessToken));
+                dispatch(setRole(role));
+                dispatch(setId(id));
+                dispatch(setName(name));
+
+                if(role === "ADMIN") {
+                    toast.success(response.data.message, {
+                        onClose: () => {
+                            nav("/admin/dashboard");
+                        }
+                    });
+                }
+                else if(role === "STUDENT") {
+                    toast.success(response.data.message, {
+                        onClose: () => {
+                            nav("/user/home");
+                        }
+                    });
+                }
+                else {
+                    toast.success(response.data.message, {
+                        onClose: () => {
+                            nav("/institute/profile");
+                        }
+                    });
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
         <>
+            <ToastContainer />
             <div className="grid grid-cols-3 overflow-clip">
                 <div className="col-span-2">
                     <img
@@ -40,7 +98,7 @@ function SignIn() {
 
 
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form className="space-y-6" action="#" method="POST">
+                        <div className="space-y-6">
                             
                             <div>
                                 <label
@@ -86,14 +144,13 @@ function SignIn() {
 
                             <div>
                                 <button
-                                    type="submit"
                                     onClick={handleSubmit}
                                     className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Sign in
                                 </button>
                             </div>
-                        </form>
+                        </div>
 
                         <p className="mt-10 text-center text-sm text-gray-500">
                             Not a member?{" "}

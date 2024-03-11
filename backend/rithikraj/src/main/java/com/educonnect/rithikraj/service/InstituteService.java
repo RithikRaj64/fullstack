@@ -12,7 +12,7 @@ public interface InstituteService {
 
     List<InstituteResponse> getAll();
 
-    Institute getById(String id) throws NotFoundException;
+    InstituteResponse getById(String id) throws NotFoundException;
 
     MessageResponse deleteById(String id);
 

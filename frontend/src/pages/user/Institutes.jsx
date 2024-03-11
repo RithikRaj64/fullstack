@@ -1,6 +1,24 @@
+import { useEffect, useState } from "react";
 import InstituteCard from "../../components/ui/user/InstituteCard";
 
+import { allIns } from "../../services/user";
+
+
 function Institutes() {
+
+  const [institutes, setInstitutes] = useState([]);
+
+  const getInstitutes = async () => {
+    let res = await allIns();
+    setInstitutes(res.data);
+    console.log(await res.data);
+  }
+
+  useEffect(() => {
+    getInstitutes();
+    console.log(institutes);
+  }, []);
+
   return (
     <div className="bg-sky-200 min-h-screen p-12">
       <div className="items-center">
@@ -17,12 +35,11 @@ function Institutes() {
         </div>
       </div>
       <div className="grid grid-cols-4">
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
-          <InstituteCard />
+          {
+            institutes.map((institute) => {
+              return <InstituteCard key={institute.id} data={institute} />
+            })
+          }
       </div>
     </div>
   );

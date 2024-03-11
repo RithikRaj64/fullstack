@@ -82,6 +82,8 @@ public class ApplicationServiceImpl implements ApplicationService {
     public MessageResponse acceptApplication(String id) {
         Application application = applicationRepository.findById(id).orElse(null);
 
+        courseService.increaseAcceptedStudentsById(application.getCourse().getId());
+
         application.setStatus("Accepted");
         applicationRepository.save(application);
 
@@ -91,6 +93,8 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public MessageResponse rejectApplicaion(String id) {
         Application application = applicationRepository.findById(id).orElse(null);
+
+        courseService.increaseAvailableSeatsById(application.getCourse().getId());
 
         application.setStatus("Rejected");
         applicationRepository.save(application);

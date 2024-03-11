@@ -1,37 +1,24 @@
-import { useEffect, useState } from "react";
-
 import User from "../../assets/images/User.png";
-
-// import ProfileCourses from "../../components/ui/user/ProfileCourses";
-import ApplicationCard from "../../components/ui/user/ApplicationCard";
-import ProfileTransactions from "../../components/ui/user/ProfileTransactions";
 
 import { useSelector } from "react-redux";
 import { getId } from "../../redux/authSlice";
-import { getAllApplications, getDetails, getStuId, getUser, updateDetails } from "../../services/user";
+import { useEffect, useState } from "react";
+import { getInstId, getDetails, updateDetails } from "../../services/institute";
+
 
 function Profile() {
 
   const userId = useSelector(getId);
 
-  const [user, setUser] = useState({});
   const [details, setDetails] = useState({});
   const [data, setData] = useState({})
-  const [applications, setApplications] = useState([]);
 
   const getDets = async () => {
-    let res = await getStuId(userId);
-    let user = await getUser(userId);
-    setUser(user.data);
-    console.log(user.data);
+    let res = await getInstId(userId);
     let dets = await getDetails(res.data.message);
     setDetails(dets.data);
-    let apps = await getAllApplications();
-    setApplications(apps.data);
-    console.log(apps.data);
     console.log(dets.data);
   }
-
   const handleChange = (e) => {
     setData({
         ...data,
@@ -42,7 +29,7 @@ function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setPersonalState(!personalState);
+    setPersonalState(!personalState)
 
     console.log(data);
 
@@ -56,8 +43,6 @@ function Profile() {
   }, []);
 
   const [personalState, setPersonalState] = useState(true);
-  // const [eduState, setEduState] = useState(true);
-  const [showWhich, setShowWhich] = useState(true);
 
   return (
     <div className="bg-sky-200 min-h-screen p-12 font-mono">
@@ -89,12 +74,12 @@ function Profile() {
           <div className="border border-gray-200 p-8 rounded-lg">
             <div className="mb-6">
               <div className="flex flex-row justify-between items-center  mb-2">
-                <p className="font-bold text-2xl">Personal Information:</p>
+                <p className="font-bold text-2xl">Information:</p>
                 {personalState ? (
                   <button
-                    className="bg-blue-600 hover:bg-sky-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
-                    onClick={() => setPersonalState(!personalState)}
-                  >
+                  className="bg-blue-600 hover:bg-sky-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
+                  onClick={() => setPersonalState(!personalState)}
+                    >
                     <div className="flex flex-row space-x-2">
                       <div className="mt-1">
                         <PencilSVG />
@@ -104,8 +89,8 @@ function Profile() {
                   </button>
                 ) : (
                   <button
-                    className="bg-green-600 hover:bg-green-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
-                    onClick={handleSubmit}
+                  className="bg-green-600 hover:bg-green-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
+                  onClick={handleSubmit}
                   >
                     <div className="flex flex-row space-x-2">
                       <div className="mt-1">
@@ -123,62 +108,30 @@ function Profile() {
                 <div className="grid grid-cols-2">
                   <div className="flex flex-col space-y-6">
                     <div>
-                      <p className="font-bold">Name</p>
-                      <p className="">{user.name}</p>
+                      <p className="font-bold">Institute Name</p>
+                      <p className="">{details.instituteName}</p>
                     </div>
                     <div>
-                      <p className="font-bold">DOB</p>
-                      <p className="">{details.dob}</p>
+                      <p className="font-bold">Location</p>
+                      <p className="">{details.location}</p>
                     </div>
                     <div>
-                      <p className="font-bold">Gender</p>
-                      <p className="">{details.gender}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">Aadhar No</p>
-                      <p className="">{details.aadharNo}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">Father Name</p>
-                      <p className="">{details.fatherName}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">10th Percentage</p>
-                      <p className="">{details.tenthPercentage}%</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Percentage</p>
-                      <p className="">{details.twelthPercentage}%</p>
+                      <p className="font-bold">Website</p>
+                      <p className="">{details.website}</p>
                     </div>
                   </div>
                   <div className="flex flex-col space-y-6">
                     <div>
                       <p className="font-bold">Email</p>
-                      <p className="">{user.email}</p>
+                      <p className="">{details.email}</p>
                     </div>
                     <div>
                       <p className="font-bold">Mobile</p>
-                      <p className="">{user.mobile}</p>
+                      <p className="">{details.mobile}</p>
                     </div>
                     <div>
-                      <p className="font-bold">Nationality</p>
-                      <p className="">{details.nationality}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">EMIS No</p>
-                      <p className="">{details.emisNo}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">Mother Name</p>
-                      <p className="">{details.motherName}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">10th Board</p>
-                      <p className="">{details.tenthBoard}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Board</p>
-                      <p className="">{details.twelthBoard}</p>
+                      <p className="font-bold">About</p>
+                      <p className="">{details.about}</p>
                     </div>
                   </div>
                 </div>
@@ -186,80 +139,34 @@ function Profile() {
                 <div className="grid grid-cols-2">
                   <div className="flex flex-col space-y-6">
                     <div>
-                      <p className="font-bold">Name</p>
+                      <p className="font-bold">Institute Name</p>
                       <input
                         type="text"
+                        name="instituteName"
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={user.name}
+                        placeholder={details.instituteName}
                         onChange={handleChange}
-                        />
+                      />
                     </div>
                     <div>
-                      <p className="font-bold">DOB</p>
-                      <input
-                        type="date"
-                        name="dob"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.dob}
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">Gender</p>
-                      <select
-                        type="text"
-                        name="gender"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        onChange={handleChange}
-                        >
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Prefer not to say">Prefer not to say</option>
-                      </select>{" "}
-                    </div>
-                    <div>
-                      <p className="font-bold">Aadhar No</p>
+                      <p className="font-bold">Location</p>
                       <input
                         type="text"
-                        name="aadharNo"
+                        name="location"
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.aadharNo}
+                        placeholder={details.location}
                         onChange={handleChange}
-                        />
+                      />
                     </div>
                     <div>
-                      <p className="font-bold">Father Name</p>
+                      <p className="font-bold">Website</p>
                       <input
-                        type="text"
-                        name="fatherName"
+                        type="url"
+                        name="website"
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.fatherName}
+                        placeholder={details.website}
                         onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">10th Percentage</p>
-                      <input
-                        type="number"
-                        name="tenthPercentage"
-                        min="0"
-                        max="100"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.tenthPercentage}
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Percentage</p>
-                      <input
-                        type="number"
-                        name="twelthPercentage"
-                        min="0"
-                        max="100"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.twelthPercentage}
-                        onChange={handleChange}
-                        />
+                      />
                     </div>
                   </div>
                   <div className="flex flex-col space-y-6">
@@ -267,229 +174,40 @@ function Profile() {
                       <p className="font-bold">Email</p>
                       <input
                         type="email"
+                        name="email"
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={user.email}
+                        placeholder={details.email}
                         onChange={handleChange}
-                        />
+                      />
                     </div>
                     <div>
                       <p className="font-bold">Mobile</p>
                       <input
                         type="text"
+                        name="mobile"
                         pattern="[0-9]{10}"
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={user.mobile}
+                        placeholder={details.mobile}
                         onChange={handleChange}
-                        />
+                      />
                     </div>
                     <div>
-                      <p className="font-bold">Nationality</p>
-                      <input
-                        type="text"
-                        name="nationality"
+                      <p className="font-bold">About</p>
+                      <textarea
+                        name="about"                        
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.nationality}
+                        placeholder={details.about}
                         onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">EMIS No</p>
-                      <input
-                        type="text"
-                        name="emisNo"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.emisNo}
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">Mother Name</p>
-                      <input
-                        type="text"
-                        name="motherName"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.motherName}
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">10th Board</p>
-                      <input
-                        type="text"
-                        name="tenthBoard"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.tenthBoard}
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Board</p>
-                      <input
-                        type="text"
-                        name="twelthBoard"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.twelthBoard}
-                        onChange={handleChange}
-                        />
+                      />
                     </div>
                   </div>
                 </div>
               )}
             </div>
           </div>
-          {/* <div className="border border-gray-200 p-6 rounded-lg">
-            <div className="mb-6">
-              <div className="flex flex-row justify-between items-center  mb-2">
-                <p className="font-bold text-2xl">Educational Information:</p>
-                {eduState ? (
-                  <button
-                    className="bg-blue-600 hover:bg-sky-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
-                    onClick={() => setEduState(!eduState)}
-                    >
-                    <div className="flex flex-row space-x-2">
-                      <div className="mt-1">
-                        <PencilSVG />
-                      </div>
-                      <p>Edit Details</p>
-                    </div>
-                  </button>
-                ) : (
-                  <button
-                    className="bg-green-600 hover:bg-green-800 border border-gray-200 rounded-lg p-1 px-3 text-white"
-                    onClick={() => setEduState(!eduState)}
-                  >
-                    <div className="flex flex-row space-x-2">
-                      <div className="mt-1">
-                        <SaveSVG />
-                      </div>
-                      <p>Save Details</p>
-                    </div>
-                  </button>
-                )}
-              </div>
-              <hr></hr>
-            </div>
-            <div>
-              {eduState ? (
-                <div className="grid grid-cols-2">
-                  <div className="flex flex-col space-y-6">
-                    <div>
-                      <p className="font-bold">10th Percentage</p>
-                      <p className="">{details.tenthPercentage}%</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Percentage</p>
-                      <p className="">{details.twelthPercentage}%</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-6">
-                    <div>
-                      <p className="font-bold">10th Board</p>
-                      <p className="">{details.tenthboard}</p>
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Board</p>
-                      <p className="">{details.twelthBoard}</p>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2">
-                  <div className="flex flex-col space-y-6">
-                    <div>
-                      <p className="font-bold">10th Percentage</p>
-                      <input
-                        type="number"
-                        name="tenthPercentage"
-                        min="0"
-                        max="100"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.tenthPercentage}
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Percentage</p>
-                      <input
-                        type="number"
-                        name="twelthPercentage"
-                        min="0"
-                        max="100"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.twelthPercentage}
-                        onChange={handleChange}
-                        />
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-6">
-                    <div>
-                      <p className="font-bold">10th Board</p>
-                      <input
-                        type="text"
-                        name="tenthBoard"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.tenthBoard}
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                      <p className="font-bold">12th Board</p>
-                      <input
-                        type="text"
-                        name="twelthBoard"
-                        className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.twelthBoard}
-                        onChange={handleChange}
-                        />
-                    </div>
-                  </div>
-                </div>
-              )} */}
-            {/* </div> */}
-          {/* </div> */}
+         
+
         </div>
-
-        {showWhich ? (
-          <div>
-            <div className="grid grid-cols-2">
-              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 underline underline-offset-8 hover:bg-sky-200">
-                <h1>Application Status</h1>
-              </button>
-              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 hover:bg-sky-200" onClick={() => setShowWhich(!showWhich)}>
-                <h1>Transaction History</h1>
-              </button>
-            </div>
-
-
-            <div className="flex flex-col space-y-5">
-              {
-                applications.map((application) => {
-                  return <ApplicationCard key={application.id} data={application} />
-                })
-              }
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className="grid grid-cols-2">
-              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 hover:bg-sky-200" onClick={() => setShowWhich(!showWhich)}>
-                <h1>Course Status</h1>
-              </button>
-              <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 underline underline-offset-8 hover:bg-sky-200">
-                <h1>Transaction History</h1>
-              </button>
-            </div>
-
-            <div className="flex flex-col space-y-5">
-              <ProfileTransactions />
-              <ProfileTransactions />
-              <ProfileTransactions />
-              <ProfileTransactions />
-              <ProfileTransactions />
-              <ProfileTransactions />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

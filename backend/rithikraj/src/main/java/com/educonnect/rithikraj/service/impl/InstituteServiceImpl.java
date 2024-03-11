@@ -43,21 +43,23 @@ public class InstituteServiceImpl implements InstituteService {
     }
 
     @Override
-    public Institute getById(String id) throws NotFoundException {
+    public InstituteResponse getById(String id) throws NotFoundException {
         Optional<Institute> isInstitute = instituteRepository.findById(id);
 
         if(isInstitute.isEmpty()) {
             throw new NotFoundException("Institute not found with the id : " + id);
         }
 
-        return Institute.builder()
-                            .instituteName(isInstitute.get().getInstituteName())
-                            .location(isInstitute.get().getLocation())
-                            .email(isInstitute.get().getEmail())
-                            .mobile(isInstitute.get().getMobile())
-                            .website(isInstitute.get().getWebsite())
-                            .about(isInstitute.get().getAbout())
-                            .build();
+        return InstituteResponse.builder()
+                    .id(isInstitute.get().getId())
+                    .completed(isInstitute.get().isCompleted())
+                    .instituteName(isInstitute.get().getInstituteName())
+                    .location(isInstitute.get().getLocation())
+                    .email(isInstitute.get().getEmail())
+                    .mobile(isInstitute.get().getMobile())
+                    .website(isInstitute.get().getWebsite())
+                    .about(isInstitute.get().getAbout())
+                    .build();
     }
 
     @Override

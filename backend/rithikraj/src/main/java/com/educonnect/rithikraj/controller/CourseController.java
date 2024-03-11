@@ -1,6 +1,7 @@
 package com.educonnect.rithikraj.controller;
 
 import static com.educonnect.rithikraj.utils.Access.COURSE_CREATE;
+import static com.educonnect.rithikraj.utils.Access.COURSE_DELETE;
 import static com.educonnect.rithikraj.utils.Access.COURSE_READ;
 import static com.educonnect.rithikraj.utils.MyConstant.ADD;
 import static com.educonnect.rithikraj.utils.MyConstant.GET;
@@ -17,6 +18,8 @@ import com.educonnect.rithikraj.service.CourseService;
 import com.educonnect.rithikraj.utils.MyConstant;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +48,7 @@ public class CourseController {
 
     }
 
-    @GetMapping(GET + "{id}")
+    @GetMapping(GET + "/{id}")
     @PreAuthorize(COURSE_READ)
     public ResponseEntity<?> getCourseById(@PathVariable String id) {
 
@@ -64,6 +67,19 @@ public class CourseController {
 
         try {
             var response = courseService.createCourse(request);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
+    @DeleteMapping(MyConstant.DELETE + "/{id}")
+    @PreAuthorize(COURSE_DELETE)
+    public ResponseEntity<?> deleteCourse(@PathVariable String id) {
+
+        try {
+            var response = courseService.deleteCourse(id);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);

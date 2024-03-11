@@ -1,6 +1,25 @@
+import { useSelector } from "react-redux";
 import CourseCard from "../../components/ui/user/CourseCard";
+import { getId } from "../../redux/authSlice";
+import { getAllCourse } from "../../services/institute";
+import { useEffect, useState } from "react";
 
 function Courses() {
+
+  const userId = useSelector(getId);
+
+  const [courses, setCourses] = useState([]);
+
+  const getCourses = async () => {
+    let res = await getAllCourse(userId);
+    setCourses(res.data);
+    console.log(res.data);
+  }
+
+  useEffect(() => {
+    getCourses();
+  }, []);
+
   return (
     // <div className={`bg-[url(../../assets/images/Course.jpg)] bg-cover backdrop-blur-lg min-h-screen p-12`}>
     <div className="bg-sky-200 min-h-screen p-12">
@@ -18,12 +37,11 @@ function Courses() {
         </div>
       </div>
       <div className="pr-9">
-          <CourseCard />
-          <CourseCard />
-          <CourseCard />
-          <CourseCard />
-          <CourseCard />
-          <CourseCard />
+        {
+          courses.map((course) => {
+            return <CourseCard key={course.id} data={course} />
+          })
+        }
       </div>
     </div>
   );

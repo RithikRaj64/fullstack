@@ -30,6 +30,7 @@ public class StudentServiceImpl implements StudentService {
 
         return students.stream()
                         .map(student -> StudentResponse.builder()
+                            .id(student.getId())
                             .fatherName(student.getFatherName())
                             .motherName(student.getMotherName())
                             .dob(student.getDob())
@@ -54,6 +55,7 @@ public class StudentServiceImpl implements StudentService {
         }
 
         return StudentResponse.builder()
+                                .id(isStudent.get().getId())
                                 .fatherName(isStudent.get().getFatherName())
                                 .motherName(isStudent.get().getMotherName())
                                 .dob(isStudent.get().getDob())
@@ -88,6 +90,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public MessageResponse updateDetails(String id, StudentRequest request) {
         Student student = studentRepository.findById(id).orElse(null);
+
+        System.out.println(request.toString());
 
         student = setStudentDetails(student, request);
         if(done(student)) student.setCompleted(true);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,6 @@ import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.service.StudentService;
 import com.educonnect.rithikraj.utils.MyConstant;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -74,6 +74,7 @@ public class StudentController {
     public ResponseEntity<?> updateDetails(@PathVariable String id, @RequestBody StudentRequest request) {
         
         try {
+            System.out.println(request.toString());
             var response = studentService.updateDetails(id, request);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {

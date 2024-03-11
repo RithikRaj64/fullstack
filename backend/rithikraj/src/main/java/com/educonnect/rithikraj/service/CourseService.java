@@ -15,6 +15,12 @@ public interface CourseService {
 
     MessageResponse decreaseAvailableSeatsById(String id);
 
+    MessageResponse increaseAvailableSeatsById(String id);
+
+    MessageResponse increaseAcceptedStudentsById(String id);
+
     MessageResponse createCourse(CourseRequest request);
+
+    MessageResponse deleteCourse(String id);
     
 }

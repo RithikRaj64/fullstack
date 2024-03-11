@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { register } from "../../services/auth";
 
 import SignUpPic from "../../assets/images/SignIn.jpg";
 
 import { ToastContainer, toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp() {
 
+    const nav = useNavigate();
     const [data, setData] = useState({});
+    const [role, setRole] = useState("STUDENT");
 
     const handleChange = (e) => {
         setData({
@@ -17,8 +21,8 @@ function SignUp() {
         });
     }
 
-    const handleSubmit = async () => {
-        // e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
         if (data.password.length < 8) {
             toast.warn("Password must be at least 8 characters long");
@@ -35,6 +39,29 @@ function SignUp() {
         if (data.password !== data.confirmPassword) {
             toast.warn("Passwords do not match");
             return;
+        }
+
+        try {
+            console.log(data);
+            console.log(role);
+            let details = {
+                "name" : data.name,
+                "email" : data.email,
+                "password" : data.password,
+                "role" : role, 
+                "mobile" : data.mobile 
+            };
+            const response = await register(details);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data.message, {
+                    onClose: () => {
+                        nav("/signin");
+                    }
+                });
+            }
+        } catch (err) {
+            console.log(err);
         }
     }
 
@@ -53,7 +80,7 @@ function SignUp() {
                     </div>
 
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form className="space-y-6" action="#" method="POST">
+                        <div className="space-y-6">
                             <div>
                                 <label
                                     htmlFor="name"
@@ -139,6 +166,30 @@ function SignUp() {
                             </div>
 
                             <div>
+                                <div className="flex items-center justify-between">
+                                    <label
+                                        htmlFor="role"
+                                        className="block text-sm font-medium leading-4 text-gray-900"
+                                    >
+                                        Select Role
+                                    </label>
+                                </div>
+                                <div className="mt-2">
+                                    <select
+                                        id="role"
+                                        name="role"
+                                        onChange={(e) => setRole(e.target.value)}
+                                        value={role}
+                                        required
+                                        className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-4"
+                                    >
+                                        <option value="STUDENT">Student</option>
+                                        <option value="INSTITUTE">Institute</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
                                 <label
                                     htmlFor="mobile"
                                     className="block text-sm font-medium leading-4 text-gray-900"
@@ -161,14 +212,13 @@ function SignUp() {
 
                             <div>
                                 <button
-                                    type="submit"
                                     onClick={handleSubmit}
                                     className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-4 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Sign Up
                                 </button>
                             </div>
-                        </form>
+                        </div>
 
                         <p className="mt-8 text-center text-sm text-gray-500">
                             Already a member?{" "}
