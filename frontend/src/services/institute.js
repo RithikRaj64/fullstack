@@ -16,3 +16,4 @@ export const deleteCourse = (id) => instance.delete(`${api_url}/course/delete/${
 // Application
 export const accept = (id) => instance.patch(`${api_url}/application/accept/${id}`);
 export const reject = (id) => instance.patch(`${api_url}/application/reject/${id}`);
+export const paid = (id) => instance.patch(`${api_url}/application/paid/${id}`);

@@ -21,8 +21,8 @@ function SignUp() {
         });
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
+        // e.preventDefault();
 
         if (data.password.length < 8) {
             toast.warn("Password must be at least 8 characters long");

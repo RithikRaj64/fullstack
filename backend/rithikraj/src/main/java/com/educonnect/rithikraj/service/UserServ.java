@@ -10,5 +10,7 @@ public interface UserServ {
     MessageResponse getStu(String id);
 
     UserResponse getById(String id);
+
+    UserResponse getUserFromStu(String id);
     
 }

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getId } from "../../redux/authSlice";
 import { useEffect, useState } from "react";
 import { getInstId, getDetails, updateDetails } from "../../services/institute";
+import { getUser } from "../../services/user";
 
 
 function Profile() {
@@ -12,10 +13,13 @@ function Profile() {
 
   const [details, setDetails] = useState({});
   const [data, setData] = useState({})
+  const [user, setUser] = useState({});
 
   const getDets = async () => {
     let res = await getInstId(userId);
     let dets = await getDetails(res.data.message);
+    let user = await getUser(userId);
+    setUser(user.data);
     setDetails(dets.data);
     console.log(dets.data);
   }
@@ -123,11 +127,11 @@ function Profile() {
                   <div className="flex flex-col space-y-6">
                     <div>
                       <p className="font-bold">Email</p>
-                      <p className="">{details.email}</p>
+                      <p className="">{user.email}</p>
                     </div>
                     <div>
                       <p className="font-bold">Mobile</p>
-                      <p className="">{details.mobile}</p>
+                      <p className="">{user.mobile}</p>
                     </div>
                     <div>
                       <p className="font-bold">About</p>
@@ -176,7 +180,7 @@ function Profile() {
                         type="email"
                         name="email"
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.email}
+                        placeholder={user.email}
                         onChange={handleChange}
                       />
                     </div>
@@ -187,7 +191,7 @@ function Profile() {
                         name="mobile"
                         pattern="[0-9]{10}"
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.mobile}
+                        placeholder={user.mobile}
                         onChange={handleChange}
                       />
                     </div>
@@ -196,7 +200,7 @@ function Profile() {
                       <textarea
                         name="about"                        
                         className="b-2 text-sm bg-sky-200 text-gray-900 rounded-md p-1 border-2 border-gray-600"
-                        placeholder={details.about}
+                        placeholder={user.about}
                         onChange={handleChange}
                       />
                     </div>

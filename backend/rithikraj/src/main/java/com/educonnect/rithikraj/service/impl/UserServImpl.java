@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.educonnect.rithikraj.dto.response.MessageResponse;
 import com.educonnect.rithikraj.dto.response.UserResponse;
+import com.educonnect.rithikraj.repository.StudentRepository;
 import com.educonnect.rithikraj.repository.UserRepository;
 import com.educonnect.rithikraj.service.UserServ;
 
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class UserServImpl implements UserServ {
     
     private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
 
     @Override
     public MessageResponse getIns(String id) {
@@ -38,6 +40,18 @@ public class UserServImpl implements UserServ {
                         .mobile(user.getMobile())
                         .password("***")
                         .build();
+    }
+
+    @Override
+    public UserResponse getUserFromStu(String id) {
+        var user = userRepository.findByStudent(studentRepository.findById(id).orElse(null));
+        
+        return UserResponse.builder()
+        .name(user.get().getName())
+        .email(user.get().getEmail())
+        .mobile(user.get().getMobile())
+        .password("***")
+        .build();
     }
 
 }

@@ -87,4 +87,17 @@ public class CourseController {
 
     }
 
+    @GetMapping(GET + "/fee/{id}")
+    @PreAuthorize(COURSE_READ)
+    public ResponseEntity<?> getCourseFee(@PathVariable String id) {
+
+        try {
+            var response = courseService.getFee(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
 }

@@ -97,7 +97,7 @@ function Courses() {
           <p>Add Course</p>
         </button>
       </div>
-      <div className="items-center">
+      {/* <div className="items-center">
         <div className="mb-5 mx-5 flex items-center">
           <div className="relative w-full">
             <input
@@ -130,7 +130,7 @@ function Courses() {
             <span className="sr-only">Search</span>
           </button>
         </div>
-      </div>
+      </div> */}
       <div className="pr-9">
         {
           courses.map((course) => {

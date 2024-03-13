@@ -58,4 +58,16 @@ public class UserController {
 
     }
 
+    @GetMapping("/get/user/stu/{id}")
+    public ResponseEntity<?> getUserFromStu(@PathVariable String id) {
+
+        try {
+            var response = userServ.getUserFromStu(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
 }

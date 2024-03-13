@@ -101,4 +101,16 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         return MessageResponse.builder().message("Application with id " + id + " has been rejected").build();
     }
+   
+    @Override
+    public MessageResponse paid(String id) {
+        Application application = applicationRepository.findById(id).orElse(null);
+
+        courseService.increaseAvailableSeatsById(application.getCourse().getId());
+
+        application.setStatus("Course Fee Paid");
+        applicationRepository.save(application);
+
+        return MessageResponse.builder().message("Application with id " + id + " has been rejected").build();
+    }
 }

@@ -1,6 +1,6 @@
 package com.educonnect.rithikraj.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,8 +36,8 @@ public class Transaction {
     @Column(nullable = false)
     private String transactionType;
 
-    @Column(nullable = false)
-    private boolean transactionStatus;
+    // @Column(nullable = false)
+    // private boolean transactionStatus;
 
     @OneToOne()
     @JoinColumn(name = "application_id", referencedColumnName = "id")

@@ -1,20 +1,14 @@
 import PropTypes from "prop-types";
 import { accept, reject } from "../../../services/institute";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-// import { useDispatch } from "react-redux";
-// import { setCrsId } from "../../../redux/viewSlice";
+import { useDispatch } from "react-redux";
+import { setUserId } from "../../../redux/viewSlice";
 
 function ApplicationCard({data}) {
 
-    // const nav = useNavigate();
-    // const dispatch = useDispatch();
-
-    
-    // const handleClick = () => {
-    //     dispatch(setCrsId(data.id));
-    //     nav("/user/course/view");
-    // }
+    const nav = useNavigate();
+    const dispatch = useDispatch();
 
     const handleAccept = async () => {
         let res = await accept(data.id);
@@ -26,6 +20,16 @@ function ApplicationCard({data}) {
         console.log(res.data.message);
     }
 
+    const handleStudent = async() => {
+        dispatch(setUserId(data.studentId));
+        nav("/institute/user/view");
+    }
+
+    // const handleCourse = async () => {
+    //     dispatch(setCrsId(data.id));
+    //     nav("/institute/course/view");
+    // }
+
     return (
         <div className="w-full flex flex-row bg-white border border-gray-200 rounded-xl shadow m-5">
             <div className="p-5 font-mono">
@@ -35,6 +39,25 @@ function ApplicationCard({data}) {
                 <p className="mb-2 font-normal text-gray-700 tracking-tighter">Course Name : {data.courseName}</p>
                 <p className="mb-5 font-normal text-gray-700 tracking-tighter">Status : {data.status}</p>
                 <div className="grid grid-cols-2 justify-center space-x-2 text-sm min-w-md max-w-md">
+                    
+                <button onClick={handleStudent} className="inline-flex text-white bg-blue-600 hover:bg-sky-800 hover:px-5 px-3 py-2 items-center justify-center rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
+                        View Student
+                        <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </button>  
+                    {/* <button onClick={handleCourse} className="inline-flex text-white bg-blue-600 hover:bg-sky-800 hover:px-5 px-3 py-2 rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
+                        View Course
+                        <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </button>   */}
+                </div>
+                {
+                    (data.status === "Applied") ? 
+                        <>
+                            <div className="grid grid-cols-2 justify-center space-x-2 text-sm min-w-md max-w-md mt-4">
+                    
                     <button onClick={handleAccept} className="inline-flex justify-center text-white bg-green-600 hover:bg-green-800  px-3 py-2 rounded-lg font-medium text-center focus:ring-4 focus:outline-none">
                         Accept Application
                         <svg className="rtl:rotate-180 w-4 h-4 ms-2 mt-1" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
@@ -53,6 +76,8 @@ function ApplicationCard({data}) {
                         </svg>
                     </button> 
                 </div>
+                        </> : <></>
+                }
             </div>
         </div>
     )
@@ -63,6 +88,7 @@ ApplicationCard.propTypes = {
         id: PropTypes.string.isRequired,
         courseName: PropTypes.string.isRequired,
         status: PropTypes.string.isRequired,
+        studentId: PropTypes.string.isRequired
     }).isRequired
 }
 

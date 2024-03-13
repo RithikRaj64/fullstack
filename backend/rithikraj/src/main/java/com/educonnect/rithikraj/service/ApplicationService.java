@@ -18,4 +18,6 @@ public interface ApplicationService {
     MessageResponse acceptApplication(String id);
 
     MessageResponse rejectApplicaion(String id);
+
+    MessageResponse paid(String id);
 }

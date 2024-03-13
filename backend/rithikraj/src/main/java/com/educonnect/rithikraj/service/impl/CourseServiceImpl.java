@@ -129,5 +129,11 @@ public class CourseServiceImpl implements CourseService {
 
         return MessageResponse.builder().message("Course deleted successfully").build();
     }
+
+    @Override
+    public MessageResponse getFee(String id) {
+        var course = courseRepository.findById(id).orElse(null);
+        return MessageResponse.builder().message("" + course.getFees()).build();
+    }
     
 }

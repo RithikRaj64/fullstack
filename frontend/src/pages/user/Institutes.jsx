@@ -21,7 +21,7 @@ function Institutes() {
 
   return (
     <div className="bg-sky-200 min-h-screen p-12">
-      <div className="items-center">
+      {/* <div className="items-center">
         <div className="mb-5 mx-5 flex items-center">
           <div className="relative w-full">
             <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-8 p-2.5" placeholder="Search institute name..." required />
@@ -33,7 +33,7 @@ function Institutes() {
             <span className="sr-only">Search</span>
         </button>
         </div>
-      </div>
+      </div> */}
       <div className="grid grid-cols-4">
           {
             institutes.map((institute) => {

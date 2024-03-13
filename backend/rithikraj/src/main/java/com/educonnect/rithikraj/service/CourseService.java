@@ -22,5 +22,7 @@ public interface CourseService {
     MessageResponse createCourse(CourseRequest request);
 
     MessageResponse deleteCourse(String id);
+
+    MessageResponse getFee(String id);
     
 }

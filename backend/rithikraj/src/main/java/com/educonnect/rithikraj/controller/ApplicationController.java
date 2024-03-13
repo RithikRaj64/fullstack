@@ -98,4 +98,18 @@ public class ApplicationController {
         }
 
     }
+
+    @PatchMapping("/paid/{id}")
+    @PreAuthorize(APPLICATION_UPDATE)
+    public ResponseEntity<?> paid(@PathVariable String id) {
+        
+        try {
+            var response = applicationService.paid(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
 }
