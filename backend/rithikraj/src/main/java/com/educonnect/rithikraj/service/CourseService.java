@@ -24,5 +24,7 @@ public interface CourseService {
     MessageResponse deleteCourse(String id);
 
     MessageResponse getFee(String id);
+
+    List<CourseResponse> getByInstId(String id);
     
 }

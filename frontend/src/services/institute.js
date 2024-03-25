@@ -12,6 +12,7 @@ export const addCourse = (data) => instance.post(`${api_url}/course/add`, data);
 export const getAllCourse = () => instance.get(`${api_url}/course/get`);
 export const getCourse = (id) => instance.get(`${api_url}/course/get/${id}`);
 export const deleteCourse = (id) => instance.delete(`${api_url}/course/delete/${id}`);
+export const getAllCourseInstitute = (id) => instance.get(`${api_url}/course/get/institute/${id}`);
 
 // Application
 export const accept = (id) => instance.patch(`${api_url}/application/accept/${id}`);

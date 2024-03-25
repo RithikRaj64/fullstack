@@ -23,6 +23,7 @@ const LazyUserInstitutes = lazy(() => import('./pages/user/Institutes'))
 const LazyUserProfile = lazy(() => import('./pages/user/Profile'))
 const LazyUserCourseDetails = lazy(() => import('./pages/user/CourseDetails'))
 const LazyUserInstituteDetails = lazy(() => import('./pages/user/InstituteDetails'))
+const LazyUserSelectedCourses = lazy(() => import('./pages/user/SelectedCourses'))
 
 const LazyInstituteProfile = lazy(() => import('./pages/institute/Profile'))
 const LazyInstituteCourses = lazy(() => import('./pages/institute/Courses'))
@@ -80,7 +81,7 @@ const UserRoutes = () => {
           <Route path="/profile" element={<LazyLayout component={LazyUserProfile} />} />
           <Route path="/course/view" element={<LazyLayout component={LazyUserCourseDetails} />} />
           <Route path="/institute/view" element={<LazyLayout component={LazyUserInstituteDetails} />} />
-          <Route path="/courses/:name" element={<LazyLayout component={LazyUserCourses} />} />
+          <Route path="/courses/selected" element={<LazyLayout component={LazyUserSelectedCourses} />} />
       </Routes>
     </UserLayout>
   )

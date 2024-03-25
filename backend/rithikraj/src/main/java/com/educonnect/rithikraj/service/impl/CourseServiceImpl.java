@@ -1,5 +1,6 @@
 package com.educonnect.rithikraj.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -134,6 +135,33 @@ public class CourseServiceImpl implements CourseService {
     public MessageResponse getFee(String id) {
         var course = courseRepository.findById(id).orElse(null);
         return MessageResponse.builder().message("" + course.getFees()).build();
+    }
+
+    @Override
+    public List<CourseResponse> getByInstId(String id) {
+        List<Course> crs = courseRepository.findAll();
+
+        List<Course> courses = new ArrayList<Course>();
+
+        for(Course c : crs) {
+            if(c.getInstitute().getId().equals(id)) courses.add(c);
+        }
+
+        return courses.stream()
+                .map(course -> CourseResponse.builder()
+                                .id(course.getId())
+                                .courseName(course.getCourseName())
+                                .instituteName(course.getInstituteName())
+                                .degreeLevel(course.getDegreeLevel())
+                                .duration(course.getDuration())
+                                .noOfSemesters(course.getNoOfSemesters())
+                                .description(course.getDescription())
+                                .fees(course.getFees())
+                                .totalSeats(course.getTotalSeats())
+                                .availableSeats(course.getAvailableSeats())
+                                .acceptedStudents(course.getAcceptedStudents())
+                                .build())
+                                .collect(Collectors.toList());
     }
     
 }
