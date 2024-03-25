@@ -3,19 +3,26 @@ import college from "../../assets/images/College.jpg";
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
+import { getId } from "../../redux/authSlice";
 import { getInsId } from "../../redux/viewSlice";
-import { getIns } from "../../services/user";
+import { getIns, getUser } from "../../services/user";
 
 function InstituteDetails() {
 
     const id = useSelector(getInsId);
+    const uid = useSelector(getId)
 
     const [details, setDetails] = useState({});
+    const [user, setUser] = useState({});
 
     const getDetails = async () => {
         let res = await getIns(id);
         setDetails(res.data);
+        let us = await getUser(uid);
+        setUser(us.data);
+
         console.log(res.data);
+        console.log(us.data);
         return;
     }
 
@@ -51,12 +58,12 @@ function InstituteDetails() {
 
                                 <div className="grid grid-cols-5">
                                     <p className="font-normal tracking-tighter">Email address</p>
-                                    <a href="mailto:principal.skcet.ac.in" className="font-normal grid grid-cols-subgrid col-span-4 underline underline-offset-2 tracking-tighter">{details.email}</a>
+                                    <a href="mailto:principal.skcet.ac.in" className="font-normal grid grid-cols-subgrid col-span-4 underline underline-offset-2 tracking-tighter">info@skcet.ac.in</a>
                                 </div>
                                 
                                 <div className="grid grid-cols-5">
                                     <p className="font-normal tracking-tighter">Contact Number</p>
-                                    <a href="tel:9025760240" className="font-normal grid grid-cols-subgrid col-span-4 underline underline-offset-2 tracking-tighter">{details.mobile}</a>
+                                    <a href="tel:9025760240" className="font-normal grid grid-cols-subgrid col-span-4 underline underline-offset-2 tracking-tighter">{user.mobile}</a>
                                 </div>
 
                             </div>

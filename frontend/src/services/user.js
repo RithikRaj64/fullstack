@@ -22,6 +22,9 @@ export const updateDetails = (id, data) => instance.patch(`${api_url}/student/up
 export const apply = (data) => instance.post(`${api_url}/application/add`, data);
 export const getAllApplications = () => instance.get(`${api_url}/application/get`);
 export const getUserFromStudent = (id) => instance.get(`${api_url}/user/get/user/stu/${id}`);
+export const getAllApplicationsInstitutes = (id) => instance.get(`${api_url}/application/get/institute/${id}`);
+export const getAllApplicationsStudent = (id) => instance.get(`${api_url}/application/get/student/${id}`);
+
 
 // Transaction
 export const pay = (data) => instance.post(`${api_url}/transaction/add`, data);

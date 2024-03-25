@@ -8,7 +8,7 @@ import ProfileTransactions from "../../components/ui/user/ProfileTransactions";
 
 import { useSelector } from "react-redux";
 import { getId } from "../../redux/authSlice";
-import { allTrans, getAllApplications, getDetails, getStuId, getUser, updateDetails } from "../../services/user";
+import { allTrans, getAllApplicationsStudent, getDetails, getStuId, getUser, updateDetails } from "../../services/user";
 
 function Profile() {
 
@@ -22,12 +22,14 @@ function Profile() {
 
   const getDets = async () => {
     let res = await getStuId(userId);
+    let studId = res.data.message;
     let user = await getUser(userId);
     setUser(user.data);
     console.log(user.data);
-    let dets = await getDetails(res.data.message);
+    let dets = await getDetails(studId);
+    if(dets.data.dob.length() >= 10) dets.data.dob = dets.data.dob.substring(0, 10);
     setDetails(dets.data);
-    let apps = await getAllApplications();
+    let apps = await getAllApplicationsStudent(studId);
     setApplications(apps.data);
     let trans = await allTrans();
     setTransactions(trans.data);

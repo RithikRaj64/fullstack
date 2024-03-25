@@ -78,7 +78,7 @@ public class InstituteController {
             var response = instituteService.updateDetails(id, request);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new MessageResponse(), HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(new MessageResponse().builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
         }
 
     }

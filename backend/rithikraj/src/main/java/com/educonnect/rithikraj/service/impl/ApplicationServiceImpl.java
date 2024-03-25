@@ -1,5 +1,6 @@
 package com.educonnect.rithikraj.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -112,5 +113,49 @@ public class ApplicationServiceImpl implements ApplicationService {
         applicationRepository.save(application);
 
         return MessageResponse.builder().message("Application with id " + id + " has been rejected").build();
+    }
+
+    @Override
+    public List<ApplicationResponse> getByStudId(String id) {
+        List<Application> apps = applicationRepository.findAll();
+
+        List<Application> applications = new ArrayList<Application>();
+
+        for(Application a : apps) {
+            if(a.getStudent().getId().equals(id)) applications.add(a);
+        }
+
+        return applications.stream()
+                        .map(application -> ApplicationResponse.builder()
+                                .id(application.getId())
+                                .studentId(application.getStudent().getId())
+                                .studentName(application.getStudent().getUser().getName())
+                                .courseId(application.getCourse().getId())                                
+                                .courseName(application.getCourse().getCourseName())
+                                .status(application.getStatus())
+                                .build())
+                                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ApplicationResponse> getByInstId(String id) {
+        List<Application> apps = applicationRepository.findAll();
+
+        List<Application> applications = new ArrayList<Application>();
+
+        for(Application a : apps) {
+            if(a.getCourse().getInstitute().getId().equals(id)) applications.add(a);
+        }
+
+        return applications.stream()
+                        .map(application -> ApplicationResponse.builder()
+                                .id(application.getId())
+                                .studentId(application.getStudent().getId())
+                                .studentName(application.getStudent().getUser().getName())
+                                .courseId(application.getCourse().getId())                                
+                                .courseName(application.getCourse().getCourseName())
+                                .status(application.getStatus())
+                                .build())
+                                .collect(Collectors.toList());
     }
 }

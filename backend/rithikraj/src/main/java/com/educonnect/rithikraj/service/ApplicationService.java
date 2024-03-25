@@ -20,4 +20,8 @@ public interface ApplicationService {
     MessageResponse rejectApplicaion(String id);
 
     MessageResponse paid(String id);
+
+    List<ApplicationResponse> getByStudId(String id);
+
+    List<ApplicationResponse> getByInstId(String id);
 }

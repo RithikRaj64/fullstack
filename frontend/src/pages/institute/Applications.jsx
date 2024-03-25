@@ -1,31 +1,34 @@
 import { useEffect, useState } from "react";
 
-// import { addCourse, getAllCourse, getInstId } from "../../services/institute";
-// import { useSelector } from "react-redux";
-// import { getId } from "../../redux/authSlice";
+import { getInstId } from "../../services/institute";
+import { useSelector } from "react-redux";
+import { getId } from "../../redux/authSlice";
 import ApplicationCard from "../../components/ui/institute/ApplicationCard";
-import { getAllApplications } from "../../services/user";
+import { getAllApplicationsInstitutes } from "../../services/user";
 
 function Courses() {
-//   const userId = useSelector(getId);
+  const userId = useSelector(getId);
 
-//   const [insId, setInsId] = useState(userId);
+  const [instId, setInstId] = useState(userId);
 
-//   const getInsId = async () => {
-//     let res = await getInstId(userId);
-//     setInsId(res.data.message);
-//   }
+  // const getInsId = async () => {
+  //   let res = await getInstId(userId);
+  //   setInsId(res.data.message);
+  // }
     
     const [applications, setApplications] = useState([]);
 
     const getDetails = async () => {
-        let res = await getAllApplications();
+        let instRes = await getInstId(userId);
+        let insId = instRes.data.message;
+        setInstId(insId);
+        let res = await getAllApplicationsInstitutes(insId);
         setApplications(res.data);
         console.log(res.data);  
     }
 
-    useEffect(() => {
-        getDetails();
+    useEffect(() => {  
+      getDetails();
     },[]);
 
     return (

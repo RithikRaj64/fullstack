@@ -60,6 +60,32 @@ public class ApplicationController {
 
     }
 
+    @GetMapping(GET + "/student/{id}")
+    @PreAuthorize(APPLICATION_READ)
+    public ResponseEntity<?> getApplicationByStudID(@PathVariable String id) {
+        
+        try {
+            var response = applicationService.getByStudId(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
+    @GetMapping(GET + "/institute/{id}")
+    @PreAuthorize(APPLICATION_READ)
+    public ResponseEntity<?> getApplicationByInstID(@PathVariable String id) {
+        
+        try {
+            var response = applicationService.getByInstId(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder().message(e.getMessage()).build(), HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
     @PostMapping(ADD)
     @PreAuthorize(APPLICATION_CREATE)
     public ResponseEntity<?> createApplication(@RequestBody ApplicationRequest request) {
