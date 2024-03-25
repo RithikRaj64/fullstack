@@ -32,6 +32,7 @@ function ApplicationCard({data}) {
         let r = await paid(data.id);
         console.log(r.data);
         console.log(res.data);
+        window.location.reload();
     }
 
     return (

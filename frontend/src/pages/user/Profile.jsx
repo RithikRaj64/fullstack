@@ -27,7 +27,7 @@ function Profile() {
     setUser(user.data);
     console.log(user.data);
     let dets = await getDetails(studId);
-    if(dets.data.dob.length() >= 10) dets.data.dob = dets.data.dob.substring(0, 10);
+    if(dets.data.dob != null) if(dets.data.dob.length >= 10) dets.data.dob = dets.data.dob.substring(0, 10);
     setDetails(dets.data);
     let apps = await getAllApplicationsStudent(studId);
     setApplications(apps.data);
@@ -55,6 +55,7 @@ function Profile() {
     let res = await updateDetails(details.id, data);
     
     console.log(res);
+    window.location.reload(); 
   }
 
   useEffect(() => {
@@ -478,7 +479,7 @@ function Profile() {
           <div>
             <div className="grid grid-cols-2">
               <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 hover:bg-sky-200" onClick={() => setShowWhich(!showWhich)}>
-                <h1>Course Status</h1>
+                <h1>Application Status</h1>
               </button>
               <button className="flex justify-center mb-8 font-bold text-lg p-4 rounded-lg mx-8 underline underline-offset-8 hover:bg-sky-200">
                 <h1>Transaction History</h1>

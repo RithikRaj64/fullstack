@@ -40,6 +40,8 @@ function Profile() {
     let res = await updateDetails(details.id, data);
     
     console.log(res);
+
+    window.location.reload();
   }
 
   useEffect(() => {

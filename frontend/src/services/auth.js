@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const api_url = "http://localhost:8080/api/v1";
+const api_url = "http://localhost:8081/api/v1";
 
 export const signIn = (data) => axios.post(`${api_url}/auth/signin`,data);
 export const register = (data) => axios.post(`${api_url}/auth/register`,data);

@@ -1,6 +1,6 @@
 import instance from "./axios"
 
-const api_url = "http://localhost:8080/api/v1";
+const api_url = "http://localhost:8081/api/v1";
 
 // Profile
 export const getInstId = (id) => instance.get(`${api_url}/user/getIns/${id}`)

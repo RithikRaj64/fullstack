@@ -46,6 +46,7 @@ function Courses() {
     let res = await addCourse(courseData);
     closeForm();
     console.log(res.data);
+    window.location.reload();
   }
 
   const [courses, setCourses] = useState([]);

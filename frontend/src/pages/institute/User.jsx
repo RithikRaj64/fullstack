@@ -20,6 +20,7 @@ function Profile() {
     setUser(user.data);
     let dets = await getDetails(stuId);
     setDetails(dets.data);
+    if(dets.data.dob != null) if(dets.data.dob.length >= 10) dets.data.dob = dets.data.dob.substring(0, 10);
     console.log(user.data);
     console.log(dets.data);
   }
@@ -65,7 +66,7 @@ function Profile() {
                     </div>
                     <div>
                       <p className="font-bold">DOB</p>
-                      <p className="">{details.dob.substring(0,10)}</p>
+                      <p className="">{details.dob}</p>
                     </div>
                     <div>
                       <p className="font-bold">Gender</p>
